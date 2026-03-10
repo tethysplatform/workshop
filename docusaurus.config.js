@@ -52,21 +52,7 @@ const config = {
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -87,6 +73,7 @@ const config = {
         logo: {
           alt: 'Tethys Platform',
           src: 'img/tethys2.svg',
+          srcDark: 'img/tethys.svg',
         },
         items: [
           {
@@ -95,9 +82,8 @@ const config = {
             position: 'left',
             label: 'Tutorial',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/tethysplatform/workshop',
             label: 'GitHub',
             position: 'right',
           },
@@ -123,16 +109,16 @@ const config = {
             title: 'Community',
             items: [
               {
+                label: 'Tethys Geoscience Foundation',
+                href: 'https://tethysgeoscience.org/',
+              },
+              {
                 label: 'GitHub Discussions',
                 href: 'https://github.com/tethysplatform/tethys/discussions',
               },
               {
                 label: 'Issue Tracker',
                 href: 'https://github.com/tethysplatform/tethys/issues',
-              },
-              {
-                label: 'Slack',
-                href: 'https://tethysplatform.slack.com/',
               },
             ],
           },
@@ -154,7 +140,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Tethys Geoscience Foundation.`,
       },
       prism: {
         theme: prismThemes.github,
