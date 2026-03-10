@@ -110,8 +110,12 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Workshop Intro',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Tethys Docs',
+                href: 'https://docs.tethysplatform.org/',
               },
             ],
           },
@@ -119,16 +123,16 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'GitHub Discussions',
+                href: 'https://github.com/tethysplatform/tethys/discussions',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                label: 'Issue Tracker',
+                href: 'https://github.com/tethysplatform/tethys/issues',
               },
               {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
+                label: 'Slack',
+                href: 'https://tethysplatform.slack.com/',
               },
             ],
           },
@@ -136,12 +140,16 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'Main Site',
+                href: 'https://www.tethysplatform.org/',
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                label: 'Tethys Source Code',
+                href: 'https://github.com/tethysplatform/tethys',
+              },
+              {
+                label: 'Demo Portal',
+                href: 'https://demo.tethysgeoscience.org/apps/',
               },
             ],
           },
