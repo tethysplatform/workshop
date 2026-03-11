@@ -78,9 +78,9 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'workshopSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Workshop',
           },
           {
             href: 'https://github.com/tethysplatform/workshop',
