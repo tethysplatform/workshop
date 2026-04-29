@@ -1,0 +1,106 @@
+{
+  "name": "GEOGLOWS Demo",
+  "description": "demo",
+  "publicDashboard": false,
+  "userPermission": "admin",
+  "permissions": [
+    {
+      "username": "admin",
+      "permission": "admin"
+    }
+  ],
+  "unrestrictedPlacement": true,
+  "image": "/media/tethysdash/app/7fc62e01-4284-4010-895d-2d4dde083b68.png",
+  "owner": "admin",
+  "notes": "",
+  "tabs": [
+    {
+      "id": 155,
+      "name": "Main",
+      "gridItems": [
+        {
+          "i": "1",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 41,
+          "source": "Map",
+          "args_string": {
+            "baseMap": "${Base Map}",
+            "layerControl": true,
+            "layers": [
+              {
+                "configuration": {
+                  "type": "ImageLayer",
+                  "props": {
+                    "name": "China Flowlines",
+                    "minZoomQuery": "12",
+                    "source": {
+                      "type": "ESRI Image and Map Service",
+                      "props": {
+                        "url": "https://livefeeds3.arcgis.com/arcgis/rest/services/GEOGLOWS/GlobalWaterModel_Medium/MapServer",
+                        "params": {
+                          "LAYERDEFS": "{\"0\": \"rivercountry = 'China'\"}"
+                        }
+                      }
+                    }
+                  }
+                },
+                "attributeAliases": {
+                  "Flow Forecast (m³/sec)": {
+                    "objectid": "OBJECTID",
+                    "comid": "TDX Hydro Link Number",
+                    "outletcomid": "Terminal TDX Hydro Link Number",
+                    "region": "TDX Hydro Region Number",
+                    "vpu": "TDX Sub Basin Id",
+                    "upstreamarea": "Upstream Drainage Area (m²)",
+                    "geodesiclength": "Geodesic Stream Length (m)",
+                    "streamorder": "Strahler Stream Order",
+                    "rivercountry": "River Country Name",
+                    "outletcountry": "Outlet Country Name",
+                    "timevalue": "Forecast Timestamp",
+                    "meanflow": "Mean Flow (m³/sec)",
+                    "thickness": "Line Class",
+                    "returnperiod": "Return Period",
+                    "shape": "Shape"
+                  }
+                },
+                "omittedPopupAttributes": {
+                  "Flow Forecast (m³/sec)": [
+                    "outletcomid",
+                    "region",
+                    "vpu",
+                    "rivercountry",
+                    "outletcountry",
+                    "thickness",
+                    "shape"
+                  ]
+                }
+              }
+            ],
+            "map_extent": {
+              "extent": "11783521.03,4042556.08,4.70"
+            },
+            "mapDrawing": {}
+          },
+          "metadata_string": {}
+        },
+        {
+          "i": "2",
+          "x": 0,
+          "y": 0,
+          "w": 18,
+          "h": 5,
+          "source": "Variable Input",
+          "args_string": {
+            "variable_name": "Base Map",
+            "show_label": true,
+            "variable_options_source": "Base Map Layers",
+            "initial_value": "https://server.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer"
+          },
+          "metadata_string": {}
+        }
+      ]
+    }
+  ]
+}
