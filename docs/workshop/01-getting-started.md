@@ -24,7 +24,7 @@ tethys scaffold earthquake_calculator
 
 You will be prompted to enter metadata about the app such as, proper name, version, author, and description. All of these metadata are optional and can be changed later in the generated app.py file (as you'll note later on). You can accept the default values by pressing enter, repeatedly.
 
-In a file browser change into your Home directory and open the tethysdev directory. If the scaffolding worked, you should see a directory called tethysapp-map_layout_tutorial. All of the source code for your app is located in this directory.
+In a file browser change into your Home directory and open the tethysdev directory. If the scaffolding worked, you should see a directory called tethysapp-earthquake_calculator. All of the source code for your app is located in this directory.
 
 To test your newly scaffolded app, install it by running the following commands:
 
@@ -81,14 +81,14 @@ You'll then see this in the app library:
 
 And if you go into your app, you would see something like this:
 
-![Updated App Name in App ](/img/getting-started/updated-name-app.png)
+![Updated App Name in App](/img/getting-started/updated-name-app.png)
 
 
 ### App Icon
 
 To set the image that shows up for your app in the Tethys library and next to the app name, first add that image to the `public/images` directory inside your app files.
 
-Here is an example image to use: *** ADD FILE LINK HERE ***
+Here is an example image to use: [Download Example App Icon](/img/getting-started/earthquake-app-icon.png)
 
 Then, change the icon attribute to the file name like so: 
 
@@ -103,7 +103,7 @@ Check out the app library to see your new app icon. It will also appear in the t
 To change the accent color used throughout your app, change the color to any hexcode color you'd like:
 
 ```python
-color='#bb323d'
+color='#0E4F57'
 ```
 
 After making these changes, just reload your app and you'll see them reflected in the browser inside your app.
@@ -114,7 +114,7 @@ Now, let's try changing the contents of your home page by editing the contents o
 
 For this tutorial, you'll be building a simple app that performs calculations relating to earthquake data. 
 
-For this example, we'll have the homepage of your app be a page wuth some introductory information.
+For this example, we'll have the homepage of your app be a page with some introductory information.
 
 Remove everything inside `home.html` and paste in the following contents:
 
@@ -162,11 +162,9 @@ def calculate(request):
     return App.render(request, 'calculations.html')
 ```
 
-Next, navigate to 
+Next, open your app and click on the button that says "Go to Calculations Page".
 
-localhost:8000/apps/earthquake_calculator/calculate
-
-You should see "This is the calculations page" in the content area of your app.
+You should be taken to a new page and now see "This is the calculations page" in the content area of your app.
 
 ## Add Calculation Inputs
 Now, let's look at putting some gizmos into the Calculations Page
@@ -177,7 +175,6 @@ Gizmos are building blocks that can be used to create beautiful interactive cont
 We begin by adding these gizmos to our controller:
 
 ```python
-
 from tethys_sdk.gizmos import Button, TextInput
 
 @controller(name="calculate", url='calculate')
@@ -214,13 +211,18 @@ Now that you've defined these gizmos, you'll need to add them to your page insid
 
 ```
 
-After refreshing the page in your browser, you should see the form with 4 inputs and a "Calculate" button. For now, the calculate button won't actually calculate anything. We'll change that soon.
+After refreshing the page in your browser, you should see the form with 4 inputs and a "Calculate" button just like this: 
+
+![Calculation Form Added to Page](/img/getting-started/calculation-form-added.png)
+
+
+For now, the calculate button won't actually calculate anything. We'll change that soon.
 
 ## Update Base Template
 
-For now, we are using the default version of what is called a base template. That template provides all of this:
+For now, we are using the default version of what is called a base template. That template provides all of these highlighted portions of the page:
 
-*** INSERT SCREENSHOT** 
+![Base Template Explained](/img/getting-started/base-template-explained.png)
 
 We can change that template, however. For our calculation page, we're going to use a base template that provides two columns with no navigation bar on the side.
 
@@ -255,7 +257,8 @@ Add the following to `calculations.html`:
 
 Go ahead and refresh your page in the browser, and you'll see this:
 
-*** ADD SCREENSHOT HERE ***
+![Switched to Two Column Template](/img/getting-started/two-column-template.png)
+
 
 
 
@@ -272,7 +275,7 @@ You'll now add two custom settings to your app. This will be saved for all users
 
 To add these settings add the following code to your `app.py` file:
 
-```python
+```python {1,6-22}
 from tethys_sdk.app_settings import CustomSetting
 
 class App(TethysAppBase):
@@ -299,14 +302,19 @@ class App(TethysAppBase):
 
 Now you can set these values in your app settings by following these steps:
 
-Begin by clicking the settings icon in the top right corner of your app, or if you're in the app library page, hover over your app icon and click the settings icon in the top left corner.
+Begin by clicking the settings icon in the top right corner of your app:
 
-*** ADD SCREENSHOTS HERE ***
+![App settings icon in app](/img/getting-started/app-settings-icon-in-app.png)
 
-Then scroll down to the 'CUSTOM SETTINGS' page:
+You can also access your app's settings from the app library page by hovering over your app icon and clicking the settings icon in the top left corner.
 
-*** ADD SCREENSHOT HERE***
+![App settings icon in app library](/img/getting-started/app-settings-icon-in-library.png)
 
+Then scroll down to the CUSTOM SETTINGS section and set your `primary_velocity` and `secondary_velocity` values:
+
+![Custom settings section](/img/getting-started/custom-settings.png)
+
+We'll go over how to utilize these values in the next step.
 
 ### Add a Form
 Now we'll need to add a form to the calculations page to handle submitting the inputs for calculations.
@@ -315,7 +323,7 @@ Begin by making the following changes to `calculations.html`:
 
 ```html {2-3,9}
 {% block app_content_lc %}
-    <form method="post">
+    <form method="post" id="calculation-form">
         {% csrf_token %}
         {% gizmo primary_time_difference1 %}
         {% gizmo secondary_time_difference1 %}
@@ -335,10 +343,11 @@ def calculate_distance(ts, tp, vs, vp):
 ```
 
 ### Update Controller
-Now, let's update the controller to handle a POST request that will come from this form.
+Now, let's update the controller to handle a POST request that will come from this form. Along with the POST data, we'll use the custom setting values you configured earlier using `App.get_custom_setting()`:
 
-```python {1, 7-31}
+```python {1,8-32}
 from .utils import calculate_distance
+...
 
 @controller(name="calculate", url='calculate')
 def calculate(request):
@@ -373,7 +382,9 @@ def calculate(request):
     return App.render(request, 'calculations.html', context)
 ```
 
-Now go ahead and add values to the 4 inputs in your calculation page, and press the calculate button. You should see values showing up in your terminal.
+Now go ahead and add time difference values to the four inputs in your calculation page, and press the calculate button. 
+
+You should see values showing up in your terminal. Those values represent the distances from the epicenter of the earthquake you are analyzing given the time difference values you provided.
 
 ### Display results in page
 Now, let's update your calculation results side to show the results in your calculation page:
@@ -407,8 +418,9 @@ Now, let's render those results in the template. This template will render regar
 {% endblock %}
 ```
 
-Now go ahead and refresh the page, and test the calculations again. You should see them show up in the right column of your page like so:
-*** insert screenshot ***
+Now go ahead and refresh the page, and test the calculations again. You should see your results show up in the right column of your page like so:
+
+![Distances rendered in right column](/img/getting-started/distances-displayed.png)
 
 ## Add Plot Graphic
 
@@ -416,7 +428,7 @@ Now that the calculations are working, let's display them in a nicer-looking way
 
 Begin by once again defining the gizmo in your controller:
 
-```python {1, 9-25}
+```python {1,9-24,26}
 from tethys_sdk.gizmos import BarPlot
 
 @controller(name="calculate", url='calculate')
@@ -432,11 +444,12 @@ def calculate(request):
             vertical=True,
             axis_units='km',
             axis_title='Distance from epicenter',
+            categories=['Locations'],
             series=[{
-                'name': 'Station 1',
+                'name': 'Location 1',
                 'data': [distance1]
             }, {
-                'name': 'Station 2',
+                'name': 'Location 2',
                 'data': [distance2]
             }]
         )
@@ -460,15 +473,18 @@ Now, let's add this bar plot to your page:
 
 Go ahead and refresh your page, and run your calculations one more time. This time, you should see a beautiful graph pop up with your calculation results. 
 
-*** INSERT SCREENSHOT HERE ***
+![Bar Plot Graph Rendered](/img/getting-started/bar-plot.png)
 
 ## Add a MapView Gizmo
 
-Now, let's replace that bar plot with an interactive map. We're going to change a few elements of your application now as well. Begin by removing the second set of inputs and renaming your gizmos and variables to reflect that:
+Now, let's replace that bar plot with an interactive map. We're going to change a few elements of your application now as well. Begin by removing the second set of inputs and renaming your gizmos and variables to reflect that. Go ahead and remove the calculations being performed and the bar plot gizmo here as well:
 
-``` python {3-5,7-13,16-17,19}
+``` python {1,6-8,10-16,18-20,22,29-30}
+    from tethys_sdk.gizmos import MapView
+    
+    
     @controller(name="calculate", url='calculate')
-    def calculate(request, app_workspace):
+    def calculate(request):
         primary_time_difference = TextInput(name='primary_time_difference', display_text='Primary Time Difference (seconds)', placeholder='e.g. 10', attributes={'type': 'number'})
         secondary_time_difference = TextInput(name='secondary_time_difference', display_text='Secondary Time Difference (seconds)', placeholder='e.g. 20', attributes={'type': 'number'})
         calculate_button = Button(display_text='Calculate', name='calculate_button', icon='calculator', submit=True, attributes={'class': 'btn btn-primary'})
@@ -487,17 +503,22 @@ Now, let's replace that bar plot with an interactive map. We're going to change 
             'calculate_button': calculate_button,
             'map_view': map_view
         }
-        ...
 
+        if request.method == "POST":
+            primary_velocity = App.get_custom_setting('primary_velocity')
+            secondary_velocity = App.get_custom_setting('secondary_velocity')
+
+            primary_time_difference_value = float(request.POST.get('primary_time_difference'))
+            secondary_time_difference_value = float(request.POST.get('secondary_time_difference'))
 
         return App.render(request, 'calculations.html', context)
 ```
 
 Next, replace the time difference gizmos inside `calculations.html` and add the MapView gizmo to your page inside the template by replacing the contents of the 'app_content_rc' block:
 
-```html {4-5,10}
+```html {4-5,11}
 {% block app_content_lc %}
-    <form method="post">
+    <form method="post" id="calculation-form">
         {% csrf_token %}
         {% gizmo primary_time_difference %}
         {% gizmo secondary_time_difference %}
@@ -512,24 +533,31 @@ Next, replace the time difference gizmos inside `calculations.html` and add the 
 
 Now open your app and refresh the page in your browser and you'll see the following:
 
-*** ADD SCREENSHOT HERE ***
+![Added MapView](/img/getting-started/added-map-view.png)
 
 ## Add an ArcGis Layer to the MapView
 Now the map is up and running, let's add a layer to it to display locations of fault lines and tectonic plate boundaries:
 
 Begin by building a MapView Layer by adding the following code to `controllers.py`:
 
-```python
-tectonic_faults_layer = MVLayer(
-    source='TileArcGISRest',
-    options={
-        'url': 'https://edumaps.esri.ca/arcgis/rest/services/MapServices/TectonicPlates/MapServer'
-    },
-    legend_title='Global Tectonic Plates & Faults',
-)
-layers = [tectonic_faults_layer]
+```python {1,8-15,17}
+from tethys_sdk.gizmos import MVLayer
+...
 
-map_view = MapView(layers=layers, **map_view_options)
+@controller(name="calculate", url='calculate')
+def calculate(request):
+    ...
+
+    tectonic_faults_layer = MVLayer(
+        source='TileArcGISRest',
+        options={
+            'url': 'https://edumaps.esri.ca/arcgis/rest/services/MapServices/TectonicPlates/MapServer'
+        },
+        legend_title='Global Tectonic Plates & Faults',
+    )
+    layers = [tectonic_faults_layer]
+
+    map_view = MapView(layers=layers, **map_view_options)
 ```
 Open the app and refresh the page to see the tectonic plate boundaries displayed on the map. Zoom in on the map to see fault lines as well.
 
@@ -539,9 +567,12 @@ Now that you've got that MapView gizmo in your calculations page, you're ready t
 
 In order to do so, we'll begin by adding drawing options that configure how drawing on this map will work. Begin by adding the following code to your `controllers.py` file:
 
-```python {4-11,18}
-@controller(name="calculate", url='calculate', app_workspace=True)
-def calculate(request, app_workspace):
+```python {1,7-14,21}
+from tethys_sdk.gizmos import MVDraw
+...
+
+@controller(name="calculate", url='calculate')
+def calculate(request):
     ...
     drawing_options = MVDraw(
         controls=['Point'],
@@ -563,29 +594,43 @@ def calculate(request, app_workspace):
 
 Now test it! Open your app and refresh the page. You should now be able to draw points on the map by clicking. Those points on the map should show up as purple dots just like you configured in `drawing_options`.
 
-Next, we'll need to include the MapView gizmo inside your form. This will require moving a few lines of code inside `calculations.html`
-We'll be placing both app_content column blocks inside the `<form>` so that the MapView gizmo is included in the form:
+Next, we'll need to include the MapView gizmo's geometry data in your form. For this, we're going to add an attribute to your MapView gizmo's options:
 
-```html {1,12}
-<form method="post">
-{% block app_content_lc %}
-    {% csrf_token %}
-    {% gizmo primary_time_difference %}
-    {% gizmo secondary_time_difference %}
-    {% gizmo calculate_button %}
-{% endblock %}
+```python {7}
+    map_view_options = {
+        'height': '400px',
+        'width': '100%',
+        'controls': 'default',
+        'basemap': ['OpenStreetMap'],
+        'draw': drawing_options,
+        'form_id': 'calculation-form'
+    }
+``` 
 
-{% block app_content_rc %}
-    {% gizmo map_view %}
-{% endblock %}
-</form>
+This attribute simply makes it so that whenever the `calculation-form` is submitted, this MapView's geometry data is added to the form's data being sent in the request. 
 
 Now whenever you press the 'calculate' button, the request will include some data from the point you place on the map. Here's how you can access that data:
 
-```python
-point_geojson = json.loads(request.POST.get("geometry"))
-coordinates = point_geojson.get("geometires")[0].get("coordinates")
+```python {1,14-16}
+import json
+...
+
+@controller(name="calculate", url='calculate')
+def calculate(request):
+    ...
+    if request.method == "POST":
+        primary_velocity = App.get_custom_setting('primary_velocity')
+        secondary_velocity = App.get_custom_setting('secondary_velocity')
+
+        primary_time_difference_value = float(request.POST.get('primary_time_difference'))
+        secondary_time_difference_value = float(request.POST.get('secondary_time_difference'))
+
+        point_geojson = json.loads(request.POST.get("geometry"))
+        coordinates = point_geojson.get("geometries")[0].get("coordinates")
+        print("Coordinates selected: ", coordinates)
 ```
+
+Now whenever you press calculate, the coordinates of the point you've drawn will be printed out to the terminal.
 
 ## Add a GeoJSON layer to the MapView
 
@@ -596,6 +641,9 @@ We'll start by generating data that can be visualized on the map in the form of 
 Inside `utils.py`, add the following code:
 
 ```python
+import math
+...
+
 def generate_circle_coordinates(center_lat, center_lon, radius):
     earth_radius = 6371
     circumference = 2 * math.pi * radius
@@ -622,25 +670,25 @@ def generate_circle_coordinates(center_lat, center_lon, radius):
     return points
 ```
 
-Now import that function inside `controllers.py`:
+Next, let's use our new coordinates generation function:
 
-```python {1}
-from .utils import calculate_distance, generate_circle_coordinates
-```
+```python {1,14-19,23,25}
+from .utils import generate_circle_coordinates
+...
 
-Next, let's use the coordinates generation function:
-
-```python {15-19}
+@controller(name="calculate", url='calculate')
+def calculate(request):
+    ...
     if request.method == "POST":
         primary_velocity = App.get_custom_setting('primary_velocity')
         secondary_velocity = App.get_custom_setting('secondary_velocity')
 
-        primary_time_difference1_value = float(request.POST.get('primary_time_difference1'))
-        secondary_time_difference1_value = float(request.POST.get('secondary_time_difference1'))
+        primary_time_difference_value = float(request.POST.get('primary_time_difference'))
+        secondary_time_difference_value = float(request.POST.get('secondary_time_difference'))
 
         distance = calculate_distance(
-            primary_time_difference1_value,
-            secondary_time_difference1_value,
+            primary_time_difference_value,
+            secondary_time_difference_value,
             primary_velocity,
             secondary_velocity
         )
@@ -659,12 +707,12 @@ For this visualization, we're not only going to create a circle, we're going to 
         primary_velocity = App.get_custom_setting('primary_velocity')
         secondary_velocity = App.get_custom_setting('secondary_velocity')
 
-        primary_time_difference1_value = float(request.POST.get('primary_time_difference1'))
-        secondary_time_difference1_value = float(request.POST.get('secondary_time_difference1'))
+        primary_time_difference_value = float(request.POST.get('primary_time_difference'))
+        secondary_time_difference_value = float(request.POST.get('secondary_time_difference'))
 
         distance = calculate_distance(
-            primary_time_difference1_value,
-            secondary_time_difference1_value,
+            primary_time_difference_value,
+            secondary_time_difference_value,
             primary_velocity,
             secondary_velocity
         )
@@ -693,8 +741,8 @@ For this visualization, we're not only going to create a circle, we're going to 
                     },
                     "properties": {
                         "distance": distance,
-                        "primary_time_difference1": primary_time_difference1_value,
-                        "secondary_time_difference1": secondary_time_difference1_value,
+                        "primary_time_difference": primary_time_difference_value,
+                        "secondary_time_difference": secondary_time_difference_value,
                         "primary_velocity": primary_velocity,
                         "secondary_velocity": secondary_velocity
                     }
@@ -716,15 +764,16 @@ circle_geojson = {
                 "coordinates": circle_coordinates
             },
         },
-        {"type": "Feature",
+        {
+            "type": "Feature",
             "geometry": {
                 "type": "Point",
                 "coordinates": [center_lon, center_lat]
             },
             "properties": {
                 "distance": distance,
-                "primary_time_difference1": primary_time_difference1_value,
-                "secondary_time_difference1": secondary_time_difference1_value,
+                "primary_time_difference": primary_time_difference_value,
+                "secondary_time_difference": secondary_time_difference_value,
                 "primary_velocity": primary_velocity,
                 "secondary_velocity": secondary_velocity
             }
@@ -794,32 +843,57 @@ circle_layer = MVLayer(
 layers.append(circle_layer)
 ```
 
-Before you can test this, you'll need to move the MapView gizmo creation down in your code, just above the page render:
+Before you can test this, you'll need to move the MapView gizmo down in your code, just above the page render:
 
-```python {5-9}
+```python {5,11,27-28}
 @controller(name="calculate", url='calculate')
 def calculate(request):
     ...
+    layers = [tectonic_faults_layer]
+    map_view = MapView(layers=layers, **map_view_options) # remove this line
+
+    context = {
+        'primary_time_difference': primary_time_difference,
+        'secondary_time_difference': secondary_time_difference,
+        'calculate_button': calculate_button,
+        'map_view': map_view # remove this line
+    }
+    ...
+    if request.method == "POST":
+        ...
+        circle_layer = MVLayer(
+            source='GeoJSON',
+            options=circle_geojson,
+            layer_options={
+                "style_map": style_map
+            },
+
+            legend_title='Earthquake Distance',
+        )
+        layers.append(circle_layer)
 
     map_view = MapView(layers=layers, **map_view_options)
     context['map_view'] = map_view
-
 
     return App.render(request, 'calculations.html', context)
 ```
 
 Now go ahead and open your app and input some values to your form and place a point on the map and hit "Calculate" to see the results on your map!
 
+![Circle Rendered On Map](/img/getting-started/circle-rendered-on-map.png)
+
+
 ## Save Calculation Results
 
 The next step to building out this app will be adding a new map with a large map using the MapLayout. We'll also be adding functionality to your form to save the results to a file to keep a record of them. You'll then display those results on the map. We'll begin by adding that results record-keeping first.
 
-We'll be using the Tethys Paths API to provide a directory to save these results. For this example, we'll use the `app_workspace` directory 
 
-*** add "for more info, see here on the Paths API ***
-To do so, update your controller definition like so:
 
-```python{1-2}
+We'll be using the [Tethys Paths API](https://docs.tethysplatform.org/en/latest/tethys_sdk/paths.html) to provide a directory to save these results to. For this example, we'll use the `app_workspace` directory 
+
+Start by updating your controller definition like so:
+
+```python {1-2}
 @controller(name="calculate", url='calculate', app_workspace=True)
 def calculate(request, app_workspace):
     ...
@@ -827,7 +901,9 @@ def calculate(request, app_workspace):
 
 Now, after you've built your circle geojson object, we'll save that data to a .json file
 
-```python {33-43}
+```python {1,35-45}
+import os
+
 @controller(name="calculate", url='calculate', app_workspace=True)
 def calculate(request, app_workspace):
     ...
@@ -851,8 +927,8 @@ def calculate(request, app_workspace):
                     },
                     "properties": {
                         "distance": distance,
-                        "primary_time_difference1": primary_time_difference1_value,
-                        "secondary_time_difference1": secondary_time_difference1_value,
+                        "primary_time_difference": primary_time_difference_value,
+                        "secondary_time_difference": secondary_time_difference_value,
                         "primary_velocity": primary_velocity,
                         "secondary_velocity": secondary_velocity
                     }
@@ -871,23 +947,25 @@ def calculate(request, app_workspace):
             measurements_file.seek(0)
             json.dump(measurements_json, measurements_file, indent=2)
             measurements_file.truncate()
-        ...
 ```
 
-Now each time you press "calculate", the results will be saved to your `measurments.json` file inside your app_workspace directory.
+Now each time you press "calculate", the results will be saved to your `measurements.json` file inside your app_workspace directory. You can find more info on the Tethys Paths API and the app_workspace directory [here](https://docs.tethysplatform.org/en/latest/tethys_sdk/paths.html).
 
 ## Add a MapLayout Page
-The last step now will be to add your MapLayout page and add a layer with your saved measurements` data.
+The last step now will be to add your MapLayout page and add a layer with your saved measurements data.
 
 Begin by adding the following code to your `controllers.py` file:
 
 ```python
 
+from tethys_sdk.layouts import MapLayout
+...
+
 @controller(name="view_all_earthquakes", url="all_earthquakes", app_workspace=True)
 class CalculationResultMapLayout(MapLayout):
     app = App
     base_template = 'earthquake_calculator/base.html'
-    map_title = f'Earthquake Calculator Map'
+    map_title = 'Earthquake Calculator Map'
     map_subtitle = 'All reported earthquakes'
     basemaps = [
         'OpenStreetMap',
@@ -895,19 +973,19 @@ class CalculationResultMapLayout(MapLayout):
     ]
 ```
 
-Now we'll add a button to navigate to your new page. Add the following code to your calulations page controller:
+Now we'll add a button to navigate to your new page. Add the following code to your calculations page controller:
 
 ```python {6,12}
 @controller(name="calculate", url='calculate', app_workspace=True)
 def calculate(request, app_workspace):
-    primary_time_difference1 = TextInput(name='primary_time_difference1', display_text='First Primary Time Difference (seconds)', placeholder='e.g. 10', attributes={'type': 'number'})
-    secondary_time_difference1 = TextInput(name='secondary_time_difference1', display_text='First Secondary Time Difference (seconds)', placeholder='e.g. 20', attributes={'type': 'number'})
+    primary_time_difference = TextInput(name='primary_time_difference', display_text='Primary Time Difference (seconds)', placeholder='e.g. 10', attributes={'type': 'number'})
+    secondary_time_difference = TextInput(name='secondary_time_difference', display_text='Secondary Time Difference (seconds)', placeholder='e.g. 20', attributes={'type': 'number'})
     calculate_button = Button(display_text='Calculate', name='calculate_button', icon='calculator', submit=True, attributes={'class': 'btn btn-primary'})
-    view_all_earthquakes_button = Button(display_text='View all', name='view_all_earthquakes_button', icon='map', href=App.reverse('all_earthquakes'), attributes={'class': 'btn btn-secondary'})
+    view_all_earthquakes_button = Button(display_text='View all', name='view_all_earthquakes_button', icon='map', href=App.reverse('view_all_earthquakes'), attributes={'class': 'btn btn-secondary'})
     ...
     context = {
-        'primary_time_difference1': primary_time_difference1,
-        'secondary_time_difference1': secondary_time_difference1,
+        'primary_time_difference': primary_time_difference,
+        'secondary_time_difference': secondary_time_difference,
         'calculate_button': calculate_button,
         'view_all_earthquakes_button': view_all_earthquakes_button
     }
@@ -926,7 +1004,7 @@ Next, place that gizmo in your calculations template:
 ```
 Now open your calculations page and click on the new button! This should take you to a new page with a full-sized map:
 
-*** add screenshot here***
+![New MapLayout Page](/img/getting-started/new-maplayout-page.png)
 
 ## Display Stored Results in MapLayout
 
@@ -969,7 +1047,7 @@ class CalculationResultMapLayout(MapLayout):
 
 Now, make sure you've added some measurements to your stored `measurements.json` file, then navigate to the "View all earthquakes" page. On the map you should see all of your stored earthquake records
 
-*** add screenshot here ***
+![Earthquakes Rendering on MapLayout Map](/img/getting-started/earthquakes-on-maplayout.png)
 
 
 ## Add a Plot
@@ -984,7 +1062,7 @@ Begin by updating your MapLayout class:
 class CalculationResultMapLayout(MapLayout):
     app = App
     base_template = 'earthquake_calculator/base.html'
-    map_title = f'Earthquake Calculator Map'
+    map_title = 'Earthquake Calculator Map'
     map_subtitle = 'All reported earthquakes'
     basemaps = [
         'OpenStreetMap',
@@ -994,24 +1072,19 @@ class CalculationResultMapLayout(MapLayout):
     plot_slide_sheet = True
 ```
 
-Next, in order to calculate the graph data needed, we'll need to import `numpy` at the top of the `controllers.py` file
+Next, in order to calculate the graph data needed, add the following code to your MapLayout class in `controllers.py`:
 
-```python
+```python {1,7-84}
 import numpy as np
-```
 
-Lastly, add the following code to your MapLayout class:
-
-```python {5-82}
 @controller(name="view_all_earthquakes", url="view_all_earthquakes", app_workspace=True)
 class CalculationResultMapLayout(MapLayout):
     ...
 
     def get_plot_for_layer_feature(self, request, layer_name, feature_id, layer_data, feature_props, *args, **kwargs):
         # LineString features (circles) have no wave props — skip them
-        import numpy as np
-        p_time = feature_props.get('primary_time_difference1')
-        s_time = feature_props.get('secondary_time_difference1')
+        p_time = feature_props.get('primary_time_difference')
+        s_time = feature_props.get('secondary_time_difference')
         if p_time is None or s_time is None:
             return 'No data', [], {}
 
@@ -1084,12 +1157,20 @@ class CalculationResultMapLayout(MapLayout):
             },
         }
 
-        return f'Travel Time Curve', data, layout
+        return 'Travel Time Curve', data, layout
 ```
 
 Now go ahead and refresh your app, and click on any center point inside the earthquake circles on the map, and click "Plot" in the popup that appears. You should see something like this:
 
-*** add a screenshot here ***
+![Plot Data Display](/img/getting-started/plot-data.png)
 
+# Wrapping Up
 
-*** ADD A FINAL PARAGRAPH HERE ***
+That's it! You've built a complete Tethys app. You've learned how to do the following: 
+- Scaffold a new Tethys app
+- Customize its look
+- Wire up forms and custom settings
+- Perform calculations
+- Visualize the results with both interactive maps and plots. 
+
+For more information and tutorials like this one on how to build Tethys web applications, checkout the [Tethys Platform documentation](https://docs.tethysplatform.org/)
