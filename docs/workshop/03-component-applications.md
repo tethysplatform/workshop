@@ -23,16 +23,7 @@ In this workshop, you will learn the fundamentals of Tethys Component App develo
   - `tethys-platorm`
   - `numpy`
   - `scipy`
-
-## Workshop sections
-
-- Create the app project
-- App class and page structure
-- Step-by-step development from boilerplate to custom app
-- Key components
-- Event handlers and callbacks
-- Reactive state and model updates
-- Designing the user experience
+  - `reactpy-django`
 
 ---
 
@@ -50,11 +41,9 @@ tethys scaffold well_drawdown_calculator -t component
 
 You can accept the defaults for all of the prompted values.
 
-
-
 ## Install the app
 
-Install the app in development mode so changes reload automatically:
+Install the app in development mode so changes reload automatically, migrate any db changes required by the app, and then start your server with the following commands:
 
 ```bash
 cd tethysapp-well_drawdown_calculator
@@ -117,7 +106,7 @@ Note that each of these components are accessed under the `tethys` namespace, or
 
 Think of components like building blocks. Components can be very basic and single-purpose, such as an image (e.g. `Image`) or some text (e.g. `Title`). They can also be combined and contained within one another, as their design allows, to make more custom and complex components. For example, a `CaptionedImage` component could be created that combines both `Image` and `Title` into a single configuration.
 
-In terms of Python syntax, components are simply Python functions. Whether simple or complex, comopnents, like any Python function, almost always accept one or more arguments. In the case of components, these are either:
+In terms of Python syntax, components are simply Python functions. Whether simple or complex, components, like any Python function, almost always accept one or more arguments. In the case of components, these are either:
 
 - `args` that define its nested content in the form of one or more nested components, such as the `Map` component nested within the `Display` in the boilerplate code.
 - `kwargs` that define its visual properties, such as its rendered size and color.
@@ -134,15 +123,15 @@ Returning to our goals with this app, we will not be needing a `Map` for our exa
 
 Note that in the case of the `Title` component, we are using `lib.m` instead of `lib.tethys`. The `lib` argument to page functions is an object that provides access to a handful of submodules - most of which are predefined libraries of components that can be used in your apps. Each submodule is accessed through its registered namespace, such as `m` or `tethys`.
 
-Most of the submodules are actually based on the underlying third-party JavaScript React component libraries that they expose via a Pythonic API. For example, the `m` submodule exposes the [Mantine Component Library](https://mantine.dev/). This is a main area in which Tethys Comopnent App development thrives and shines, since the JavaScript React community has developed dozens of component libraries that provide almost everything you could ever need for web development. Many of these are exposed under various submodules (see [Third-Party ReactJS Libraries](https://docs.tethysplatform.org/en/stable/tethys_sdk/components.html#tethys-components-library) for the full list). 
+Most of the submodules are actually based on the underlying third-party JavaScript React component libraries that they expose via a Pythonic API. For example, the `m` submodule exposes the [Mantine Component Library](https://mantine.dev/). This is a main area in which Tethys Component App development thrives and shines, since the JavaScript React community has developed dozens of component libraries that provide almost everything you could ever need for web development. Many of these are exposed under various submodules (see [Third-Party ReactJS Libraries](https://docs.tethysplatform.org/en/stable/tethys_sdk/components.html#tethys-components-library) for the full list). 
 
 It is also possible to `register` your own wrapper around an existing third-party ReactJS library if you find a component library out there that is not already part of the Tethys Component Library. Though we will not get into that for this workshop, you can see our official documentation on it [here](https://docs.tethysplatform.org/en/stable/tethys_sdk/components.html#registering-additional-reactjs-component-libraries).
 
-Though these third-party JavaScript React component library submodules are powerful, they also expose one of the current challenges with Tethys Component App development: reading and "translating" JavaScript documentation to its Pythonic equivalent. For a crash-course on that, see our official documentation [here](https://docs.tethysplatform.org/en/stable/tethys_sdk/components.html#converting-html-jsx-to-python).
+Though these third-party JavaScript React component library submodules are powerful, they also expose one of the few challenges with Tethys Component App development: reading and "translating" JavaScript documentation to its Pythonic equivalent. For a crash-course on that, see our official documentation [here](https://docs.tethysplatform.org/en/stable/tethys_sdk/components.html#converting-html-jsx-to-python).
 
-The `tethys` module provides access to custom, complex components created specifically for common Tethys app use cases, such as the `Map` and `Chart`. Under the covers, these `tethys` components are combining a handful of the third-party ReactJS components into a specific configuration of nested components and properties and controlling which `args_as_nested_component` and `kwarg_as_properties` can be provided by the user for further customization.
+The `tethys` module provides access to custom, complex components created specifically for common Tethys app use cases, such as the `Map` and `Chart`. Under the covers, these `tethys` components are combining a handful of the third-party ReactJS components into a specific configuration of nested components and properties and controlling which `args` as nested components` and `kwargs` as properties can be provided by the user for further customization.
 
-Now that you understand a big more about the [Tethys Component App Library](https://docs.tethysplatform.org/en/stable/tethys_sdk/components.html#tethys-component-app-page-library) (i.e. the `lib` object), you can try playing with the `lib.m.Title` we added by providing and tweaking various `props_as_kwargs` per the official documentation [here](https://mantine.dev/core/title/?t=props). For example, you could try something like this: `lib.m.Title(order=2)("Well Drawdown Calculator")`.
+Now that you understand a bit more about the [Tethys Component App Library](https://docs.tethysplatform.org/en/stable/tethys_sdk/components.html#tethys-component-app-page-library) (i.e. the `lib` object), you can try playing with the `lib.m.Title` we added by providing and tweaking various `props_as_kwargs` per the official documentation [here](https://mantine.dev/core/title/?t=props). Note that the actual text content of the `Title` is a nested text component, rather than a property. For example, you could try something like this: `lib.m.Title(order=2)("Well Drawdown Calculator")`.
 
 Now we are ready to get to the main focus of our application - that which makes it unique: the well drawdown function.
 
@@ -199,10 +188,10 @@ Any components of your web page that must be dynamic based on coniditional event
 The `lib.hooks.use_state` function:
 - Takes a single argument that represents the **initial, default value** the variable should hold. This is what should be shown when your application page first loads.
 - Returns two objects:
-  - The ***state variable**, which contains the **current** value of the variable, which could be different than the initial, default value provided to the function.
+  - The ***state variable***, which contains the **current** value of the variable, which at any given time could be different than the initial, default value provided to the function.
   - The setter/updater function that should be used elsewhere in your application logic when the ***state variable*** needs to be updated.
 
-Go ahead and create a ***state variable** for each of the five `calculate_drawdown` arguments. It will end up looking something like this:
+Go ahead and create a ***state variable*** for each of the five `calculate_drawdown` arguments. It will end up looking something like this:
 
 ```python
 @App.page
@@ -224,15 +213,24 @@ Note the following:
 
 ### Add transitionary calculations
 
-Because our state variables are not the exact values needed for our `calculate_drawdown` function, we need to massage them a bit before using them in our function. There is a bit of foresight needed here, too, depending on what exactly we want our application page to look like. In the case of well water drawdown, this is best visualized in either a x-y chart with distance vs. drawdown or a 2D heat map. We'd like to provide both, so that means we need to create both a single array representing sampled points along a single `max_distance` line from the well, and a 2d array representing sampled points in all radial directions of `max_distance` from the well.
+Because our state variables are not the exact values needed for our `calculate_drawdown` function, we need to massage them a bit before using them in our function. There is a bit of foresight needed here, too, depending on what exactly we want our application page to look like. 
+
+In the case of well water drawdown, this is best visualized in either a x-y chart with distance vs. drawdown or a 2D heat map. We'd like to provide both, so that means we need to create both a single array representing sampled points along a single `max_distance` line from the well, and a 2d array representing sampled points in all radial directions of `max_distance` from the well.
 
 We can then call the `calculate_drawdown` function once for each of these cases to get the two arrays we plan to plot.
 
-That is all done with the following code, which should be added just below the previous section with the state variables:
+First, we will need to import our `calculate_drawdown` function as well as `numpy`. Add these lines to the top of your `app.py`:
+
+```python
+import numpy as np
+from .model import calculate_drawdown
+```
+
+Next, add the following code just below the state variable declarations in your `home` function:
 
 ```python
     # Derive the actual Storativity value for the model
-    s_actual = 10**s_exponent
+    s_actual = 10 ** s_exponent
     
     # Create a 2D grid of x and y coordinates (e.g., -500m to 500m)
     x = np.linspace(-max_distance, max_distance, samples)
@@ -248,22 +246,54 @@ That is all done with the following code, which should be added just below the p
     drawdown_2d = calculate_drawdown(q, t, s_actual, time, R)
 ```
 
-### Build the Display
+Now that we have everything that we need to display stored in either ***state variables*** or subsequently calculated standard variables, we can focus on building our component display. This means passing in new args as nested components to our `lib.tethys.Display` component.
 
-Now that we have everything that we need to display stored in either ***state variables*** or subsequently calculated standard variables, we can focus on building our component display. This means passing in new `args_as_nested_components` to our `lib.tethys.Display` component.
+## Design the UI
 
-## Building Input Controls
+Before we start writing code for our user interface, we should have at least a basic idea of what we want it to look like and how the user will interact with it.
 
-The first step in building our component tree is to create interactive controls that allow users to adjust the model parameters. We'll use a combination of Mantine components to create an intuitive interface.
+For this application, let's go with the following:
 
-### Layout with Grid
+```
+┌────────────────────────────────┐
+│ Title (full width)             │
+├────────────────────────────────┤
+│ Input Controls (Full width)    │
+│ (Sliders with labels/values)   │
+├─────────────────┬──────────────┤
+│ Line Plot       │ Heatmap      │
+│ (half-width)    │ (half-width) │
+└─────────────────┴──────────────┘
+```
 
-Mantine's `Grid` and `GridCol` components are great for creating responsive layouts. The grid system is based on a 12-column layout, where each `GridCol` specifies how many columns it should span:
+This layout is effective because:
+- **Inputs at top**: Users immediately see what they can adjust
+- **Side-by-side plots**: Easy to compare the 1D vs 2D visualization
+
+We can also ensure that each parameter has a dedicated color that appears in both the sliders and the values. This consistency can help users create mental associations that facilitate their experience. Let's go with the following:
+
+- Yellow = Max Distance
+- Turquoise = Samples
+- Blue = Pumping Rate
+- Green = Transmissivity
+- Purple = Storativity
+- Orange = Time
+
+Now that we know what we want, we need to choose the best components with which to build it.
+
+## Implement UI Design
+
+### Layout
+
+The overall layout structure can be achieved using Mantine's Grid System components, `Grid` and `GridCol` (see https://mantine.dev/core/grid/). The grid system is based on a 12-column layout, where each `GridCol` specifies how many columns it should span. Let's replace the `Title` component (which we'll re-insert in its proper place in a moment) with the following:
 
 ```python
     return lib.tethys.Display(
-        lib.m.Title(order=1)("Interactive Theis Equation Solver"),
         lib.m.Grid(
+            # Title on its own row (span=12)
+            lib.m.GridCol(span=12)(
+                # Title goes here
+            ),
             # All input controls on one row (span=12)
             lib.m.GridCol(span=12)(
                 # Input controls go here
@@ -281,12 +311,22 @@ Mantine's `Grid` and `GridCol` components are great for creating responsive layo
 ```
 
 This layout creates:
-- One full-width column (span=12) for input controls at the top
-- Two side-by-side columns (span=6 each) for the plots below
+- Two full-width columns (span=12) for title and input controls
+- Two side-by-side columns (span=6 each) for the plots
+  
+### Title
 
-### Input Control Pattern
+The title is extremely simple and can be achieved with Mantine's `Title` component that we already explored a bit above. Nest it inside of the first `GridCol` component like so:
 
-For each parameter, we'll create a consistent control pattern using `Group`, `Text`, `Badge`, and `Slider` components:
+```python
+            lib.m.GridCol(span=12)(
+                lib.m.Title(order=1)("Well Drawdown Calculator")
+            ),
+```
+
+### Input Controls
+
+Now for each each parameter, we'll use the following pattern:
 
 ```python
                 lib.m.Group(
@@ -304,16 +344,14 @@ For each parameter, we'll create a consistent control pattern using `Group`, `Te
 ```
 
 This pattern includes:
-- **Group**: Container that keeps the label and badge together
-- **Text**: Descriptive label for the parameter
-- **Badge**: Shows the current value in real-time
-- **Slider**: Interactive control for adjusting the value
+- **Group**: Container that keeps the label and badge together (see https://mantine.dev/core/group/)
+- **Text**: Descriptive label for the parameter (see https://mantine.dev/core/text/)
+- **Badge**: Shows the current value in real-time (see https://mantine.dev/core/badge/)
+- **Slider**: Interactive control for adjusting the value (see https://mantine.dev/core/slider/)
 
-The `onChangeEnd` event handler is called when the user finishes adjusting the slider, triggering an update to the state variable via the setter function (e.g., `set_max_distance`).
+Note that the `value` property of the `Slider` is set to the ***state variable*** we created for this paramter, `max_distance`, and that the setter for this variable is passed to the `onChangeEnd` to ensure that `max_distance` (and) stays in-sync with the value that the user chosen with the `Slider`. More on this concept later.
 
-### Creating All Input Controls
-
-Add all six parameter controls inside the first `GridCol(span=12)`:
+Go ahead and add all six parameter controls inside the first `GridCol(span=12)`, like so:
 
 ```python
             lib.m.GridCol(span=12)(
@@ -406,11 +444,11 @@ Note the following design choices:
 - The `Badge` components display the current value with matching colors for visual consistency
 - The `onChangeEnd` events trigger state updates whenever the user finishes adjusting a slider
 
-## Building Visualization Components
+Now we can move on to adding the plots to actually display the chart data we prepared above.
 
 ### Line Plot Component
 
-The first plot shows drawdown vs. distance along a line from the well. This is created using the Plotly component library, accessed on the `pl` namespace of `lib`:
+Recall that we want our first plot to shows drawdown vs. distance along a line from the well using a line chart. For this, we will pivot away from Mantine and use a library more specialized for plotting: Plotly (see https://github.com/plotly/react-plotly.js/). This package is accessed on the `pl` namespace of `lib` and can be added as a nested component to the first `GridCol(span=6)` component like so:
 
 ```python
             lib.m.GridCol(span=6)(
@@ -442,13 +480,12 @@ The first plot shows drawdown vs. distance along a line from the well. This is c
 Key components:
 - **Plot**: The Plotly component that renders interactive plots
 - **style**: Sets the plot dimensions to fill its container
-- **data**: A list of trace objects, each with x/y values and styling
+- **data**: A list of the datasets to be plotted, each with respective lists of x/y values and styling parameters. We only have one dataset to plot, and it's a "scatter" plot with red lines and markers.
 - **layout**: Configuration for titles, axes, and overall appearance
-- **tolist()**: Converts numpy arrays to Python lists for JSON serialization
 
 ### Heatmap Component
 
-The second plot shows a 2D plan view of drawdown around the well using a heatmap:
+We want the second plot to show a 2D plan view of drawdown around the well using a heatmap. Again, we will use Plotly with slightly different properties and add it as a nested component to the second `GridCol(span=6)` component like so:, like so:
 
 ```python
             lib.m.GridCol(span=6)(
@@ -484,36 +521,198 @@ Key differences from the line plot:
 - **colorscale**: The color scheme used (Viridis is a perceptually uniform colormap)
 - **reversescale=True**: Reverses the color direction so higher values are darker
 
----
 
-# Event Handlers and Callbacks
+### Putting It All Together
 
-This section explains how to create interactive behaviors in your application through event handling.
-
-## Understanding Event Handlers
-
-Event handlers are functions that respond to user interactions with your components. When a user interacts with a component (like moving a slider or clicking a button), the handler function is called with an event object containing details about the interaction.
-
-## Slider Events
-
-Slider components emit events when the user finishes adjusting them. In our app, each slider uses the `onChangeEnd` property to specify which state setter to call:
+We have now completely covered all of the code required to create your simple well drawdown calculator app, as contained within the `home` function. Just to be sure, your final `home` function should look like this:
 
 ```python
-lib.m.Slider(
-    value=q,
-    onChangeEnd=set_q  # Called when user finishes adjusting
-)
+@App.page
+def well_drawdown(lib):
+    # State management for reactive inputs
+    max_distance, set_max_distance = lib.hooks.use_state(100)  # Max distance from well (m)
+    samples, set_samples = lib.hooks.use_state(100)  # Number of distance samples for plotting
+    q, set_q = lib.hooks.use_state(1000)  # Pumping rate (m3/day)
+    t, set_t = lib.hooks.use_state(100)   # Transmissivity (m2/day)
+    s_exponent, set_s_exponent = lib.hooks.use_state(-3.0)  # Storativity (unitless)
+    time, set_time = lib.hooks.use_state(10) # Time (days)
+    
+    # Convert exponent to actual storativity value
+    s_actual = 10 ** s_exponent
+
+    # Create a 2D grid of x and y coordinates (e.g., -500m to 500m)
+    x = np.linspace(-max_distance, max_distance, samples)
+    y = np.linspace(-max_distance, max_distance, samples)
+    X, Y = np.meshgrid(x, y)
+
+    # Calculate radial distance 'r' for every point in the grid
+    R = np.sqrt(X**2 + Y**2)
+
+    # Model execution (triggers every time state changes)
+    distances = np.linspace(1, max_distance, samples)
+    drawdown_line = calculate_drawdown(q, t, s_actual, time, distances)
+    drawdown_2d = calculate_drawdown(q, t, s_actual, time, R)
+
+    # 4. Return the layout using Python components
+    return lib.tethys.Display(
+        lib.m.Grid(
+            lib.m.GridCol(span=12)(
+                lib.m.Title(order=1)("Well Drawdown Calculator"),
+            ),
+            # Sidebar for inputs
+            lib.m.GridCol(span=12)(
+                lib.m.Group(
+                    lib.m.Text(size="sm")("Max Distance from Well (m)"),
+                    lib.m.Badge(color="yellow")(max_distance),
+                ),
+                lib.m.Slider(
+                    color="yellow",
+                    value=max_distance,
+                    min=50,
+                    max=200,
+                    step=5,
+                    onChangeEnd=set_max_distance
+                ),
+                
+                lib.m.Group(
+                    lib.m.Text(size="sm")("Samples"),
+                    lib.m.Badge(color="turquoise")(samples),
+                ),
+                lib.m.Slider(
+                    color="turquoise",
+                    value=samples,
+                    min=10,
+                    max=100,
+                    step=5,
+                    onChangeEnd=set_samples
+                ),
+
+
+                lib.m.Group(
+                    lib.m.Text(size="sm")("Pumping Rate (m³/day)"),
+                    lib.m.Badge(color="blue")(q),
+                ),
+                lib.m.Slider(
+                    color="blue",
+                    value=q,
+                    min=100,
+                    max=5000,
+                    step=100,
+                    onChangeEnd=set_q
+                ),
+                
+                lib.m.Group(
+                    lib.m.Text(size="sm")("Transmissivity (m²/day)"),
+                    lib.m.Badge(color="green")(t),
+                ),
+                lib.m.Slider(
+                    color="green",
+                    min=10,
+                    max=1000,
+                    value=t,
+                    onChangeEnd=set_t
+                ),
+
+                lib.m.Group(
+                    lib.m.Text(size="sm")("Storativity (log10(S))"),
+                    lib.m.Badge(color="purple")(f"{s_exponent:.2f}"),
+                ),
+                lib.m.Slider(
+                    color="purple",
+                    min=-5,
+                    max=-1,
+                    step=0.1, 
+                    value=s_exponent, 
+                    onChangeEnd=set_s_exponent
+                ),
+
+                lib.m.Group(
+                    lib.m.Text(size="sm")("Time (days)"),
+                    lib.m.Badge(color="orange")(time),
+                ),
+                lib.m.Slider(
+                    color="orange",
+                    min=1,
+                    max=100,
+                    value=time,
+                    onChangeEnd=set_time
+                ),
+            ),
+            
+            # Line plot of drawdown
+            lib.m.GridCol(span=6)(
+                lib.pl.Plot(
+                    style=lib.Style(width="100%", height="100%"),
+                    data=[
+                        lib.Props(
+                            x=distances.tolist(),
+                            y=drawdown_line.tolist(),
+                            type="scatter",
+                            mode="lines+markers",
+                            marker=lib.Props(color="red"),
+                        ),
+                    ],
+                    layout=lib.Props(
+                        autosize=True,
+                        title=lib.Props(text="Theis Drawdown vs Distance"),
+                        xaxis=lib.Props(
+                            title=lib.Props(text="Distance from Well (m)"),
+                        ),
+                        yaxis=lib.Props(
+                            title=lib.Props(text="Drawdown (m)"),
+                        ),
+                    ),
+                )
+            ),
+
+            # 2D contour plot of drawdown
+            lib.m.GridCol(span=6)(
+                lib.pl.Plot(
+                    style=lib.Style(width="100%", height="100%"),
+                    data=[
+                        lib.Props(
+                            z=drawdown_2d.tolist(),
+                            x=x.tolist(),
+                            y=y.tolist(),
+                            type="heatmap",
+                            colorscale="Viridis",
+                            reversescale=True,
+                        ),
+                    ],
+                    layout=lib.Props(
+                        autosize=True,
+                        title=lib.Props(text="Plan View Drawdown Heat Map"),
+                        xaxis=lib.Props(
+                            title=lib.Props(text="Distance from Well (m)"),
+                        ),
+                        yaxis=lib.Props(
+                            title=lib.Props(text="Drawdown (m)"),
+                        ),
+                    ),
+                )
+            )
+        )
+    )
 ```
 
-When the user releases the slider, `set_q` is called with the new value, which updates the state and triggers a re-render.
+Make sure you did not forget any commas. That is a common gotcha. Almost every line of the `return` block should end in either a comma (`,`) or an open parenthesis (`(`).
 
-# Reactive State and Model Updates
+Now it is time to go use the app yourself to see how it all works.
+---
 
-This section explains how state changes drive the entire application experience.
+# Using the App
+
+Make sure your server is still running on the command line (recall that was with the `tethys start` command), and return back to your browser to view your app at http://localhost:8000/apps/well-drawdown-calculator.
+
+You should now have a fully-functional app! Go ahead and click on various spots across the sliders and watch the graphs almost immediately update.
+
+Now, to understand a bit about the underlying mechanisms at play.
+
+# Understanding the App Lifecycle
 
 ## The State-Driven Workflow
 
-In Tethys Component Apps, the entire page re-renders whenever state changes. This creates a predictable flow:
+In Tethys Component Apps, the entire page re-renders whenever state changes (i.e. whenever ***state variables*** are updated). This creates a predictable flow:
 
 1. User interacts with a component (moves slider, clicks button)
 2. Event handler calls a state setter function with the new value
@@ -559,101 +758,7 @@ Since the page function re-executes on every state change, it's important to kee
 - **Simple transformations** like creating arrays and calculating values happen instantly
 - **Avoid expensive operations** inside page functions without memoization
 
-In our app, even with a 100×100 grid (10,000 points) and the complex Theis calculation, updates are nearly instantaneous on modern hardware.
-
-## State Persistence
-
-State persists during a user's session:
-- Users can interact with sliders repeatedly
-- Values are retained until the page is refreshed
-- Refreshing the page resets all state to initial values
-
-This is the expected behavior for most applications, though more advanced patterns (like localStorage or server persistence) could be added for more complex use cases.
-
----
-
-# Designing the User Experience
-
-This section explores the UX decisions that make our app effective for learning and exploration.
-
-## Layout Strategy
-
-Our app uses a three-section layout:
-
-```
-┌────────────────────────────────┐
-│       Title (Full width)       │
-├────────────────────────────────┤
-│    Input Controls (Full width) │
-│  (Sliders with labels/badges)  │
-├─────────────────┬──────────────┤
-│  Line Plot      │  Heatmap     │
-│  (span=6)       │  (span=6)    │
-└─────────────────┴──────────────┘
-```
-
-This layout is effective because:
-- **Inputs at top**: Users immediately see what they can adjust
-- **Side-by-side plots**: Easy to compare the 1D vs 2D visualization
-- **Responsive**: On mobile, the layout stacks vertically (thanks to the grid system)
-
-## Color-Coding Strategy
-
-Each parameter has a dedicated color that appears in three places:
-
-1. The slider control
-2. The value badge
-3. The associated label
-
-This consistency helps users create mental associations:
-- Yellow = Max Distance
-- Turquoise = Samples
-- Blue = Pumping Rate
-- Green = Transmissivity
-- Purple = Storativity
-- Orange = Time
-
-This design pattern is effective for reducing cognitive load and improving usability.
-
-## Real-Time Feedback
-
-The app provides immediate visual feedback for every interaction:
-
-```
-User Action → State Update → Re-render → Visual Change
-```
-
-With no delays or loading screens, users feel like they're directly manipulating the model. This encourages exploration and learning.
-
-## Educational Value
-
-The app is structured to teach several concepts:
-
-1. **Parameter sensitivity**: Adjusting sliders shows how each parameter affects the model output
-2. **Spatial patterns**: The 2D heatmap reveals symmetry and distance-dependence
-3. **Model limitations**: Storativity must be very small; pumping rate has dramatic effects
-4. **Data-driven modeling**: The calibration button demonstrates how models are fit to observations
-
-## Accessibility Considerations
-
-The design includes several accessibility features:
-
-- **Semantic HTML**: Components use proper heading levels and text elements
-- **Color contrast**: Mantine components follow WCAG guidelines
-- **Keyboard navigation**: All controls are keyboard accessible
-- **Labels**: Every input has a clear descriptive label
-- **Responsive**: Works on phones, tablets, and desktops
-
-## Extending the App
-
-To build upon this foundation, consider:
-
-- **Add more plots**: Show parameter sensitivity curves
-- **Save/load scenarios**: Let users save favorite parameter combinations
-- **Export data**: Allow users to download plot data as CSV
-- **Model variations**: Add additional models (Hantush, Cooper-Jacob approximations)
-- **Field data upload**: Let users upload their own observations for calibration
-- **3D visualization**: Replace heatmap with an interactive 3D surface
+In our app, even with a 100×100 grid (10,000 points) and the complex Theis calculation, updates are nearly instantaneous on modern hardware. If that were not the case, and our model took longer to run, we'd have to explore a different paradigm in which the model runs in the background and the user is provided feedback via loading animations or something similar.
 
 ---
 
