@@ -26,6 +26,8 @@ You will be prompted to enter metadata about the app such as, proper name, versi
 
 In a file browser change into your Home directory and open the tethysdev directory. If the scaffolding worked, you should see a directory called tethysapp-earthquake_calculator. All of the source code for your app is located in this directory.
 
+## Install App
+
 To test your newly scaffolded app, install it by running the following commands:
 
 ```bash
