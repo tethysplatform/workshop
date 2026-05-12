@@ -222,8 +222,8 @@ We can then call the `calculate_drawdown` function once for each of these cases 
 First, we will need to import our `calculate_drawdown` function as well as `numpy`. Add these lines to the top of your `app.py`:
 
 ```python
-import numpy as np
 from .model import calculate_drawdown
+import numpy as np
 ```
 
 Next, add the following code just below the state variable declarations in your `home` function:
@@ -528,7 +528,7 @@ We have now completely covered all of the code required to create your simple we
 
 ```python
 @App.page
-def well_drawdown(lib):
+def home(lib):
     # State management for reactive inputs
     max_distance, set_max_distance = lib.hooks.use_state(100)  # Max distance from well (m)
     samples, set_samples = lib.hooks.use_state(100)  # Number of distance samples for plotting
@@ -767,7 +767,6 @@ In our app, even with a 100×100 grid (10,000 points) and the complex Theis calc
 Congratulations! You now understand the core concepts of Tethys Component App development:
 
 - **Scaffolding**: Creating new apps with the tethys CLI
-- **App metadata**: Configuring the App class
 - **Page functions**: Building interactive pages with the `@App.page` decorator
 - **State management**: Using `lib.hooks.use_state` for reactive variables
 - **Components**: Combining UI building blocks (Mantine, Plotly, Tethys) into complex interfaces
@@ -776,6 +775,8 @@ Congratulations! You now understand the core concepts of Tethys Component App de
 - **UX design**: Creating effective, accessible interfaces for scientific applications
 
 The well drawdown calculator serves as a template that you can adapt for other scientific models. The patterns you learned here—state management, component composition, event handling—apply to any Tethys Component App you develop in the future.
+
+View the solution code for the Well Drawdown Calculator application here: https://github.com/tethysplatform/tethysapp-well_drawdown_calculator.
 
 As you continue building Tethys apps, remember these key principles:
 
