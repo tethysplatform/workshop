@@ -19,6 +19,12 @@ This tutorial walks through building a TethysDash dashboard that displays the GE
 - Be comfortable creating and editing dashboard items
 - Know what Variable Inputs and Maps are in TethysDash
 
+## Login to the TGF Portal
+
+1. Navigate to the TGF Portal: https://demo.tethysgeoscience.org/
+2. Press the Log In button and log in with your TGF Portal account. Use the Sign Up link to create an account if you don't have one.
+3. Go to the Apps page and launch the TethysDahs application.
+
 ## Steps
 
 ### Step 1 — Create the dashboard
@@ -30,7 +36,7 @@ This tutorial walks through building a TethysDash dashboard that displays the GE
 3. Click **Create**.
 4. Double-click the new `GEOGLOWS Demo` dashboard card to open it.
 
-You should now be looking at a fresh dashboard containing one default grid item.
+You should now be looking at a fresh dashboard containing one default grid item. If the **TethysDash Dashboards** modal appears, dismiss it by checking the "Don't show on startup" option and then pressing the "X" button. You may reopen the modal in the future by pressing the *i* button in the app header.
 
 ### Step 2 — Edit the existing grid item to be a Map
 
@@ -119,7 +125,7 @@ Click the **Edit** (pencil) icon to re-enter edit mode. You will now add a Varia
 
 6. In the variable input editor preview, click the dropdown and select an initial base map (for example, `World Topo Map`).
 7. Click **Save** at the bottom of the variable input editor.
-8. Resize and reposition the variable input as you like (e.g., top-right corner as a floating item).
+8. Resize and reposition the variable input as you like (e.g., top-left corner as a floating item).
 
 ### Step 13 — Edit the map
 

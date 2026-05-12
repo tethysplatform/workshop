@@ -16,7 +16,8 @@ This tutorial picks up where [TethysDash: Creating Dashboards](./04-tethysdash-c
 ## Prerequisites
 
 - Complete [TethysDash: Creating Dashboards](./04-tethysdash-creating-dashboards.md). You should have a dashboard named **GEOGLOWS Demo** that contains a Map of Chinese GEOGLOWS flowlines and a **Base Map** variable input.
-- The `tethysdash_examples` plugin package must be installed as a TethysDash dependency. It provides the `GeoGLOWS Forecast Plot` visualization used in this tutorial.
+- A local installation of TethysDash, see [Installation and Setup -- TethysDash](https://tethysdash.readthedocs.io/en/latest/installation.html#quick-installation).
+-  The [tethysdash_examples](https://github.com/FIRO-Tethys/tethysdash_examples) plugin package must be installed as a TethysDash dependency. It provides the `GeoGLOWS Forecast Plot` visualization used in this tutorial.
 
 ## Steps
 
@@ -33,7 +34,8 @@ Open your **GEOGLOWS Demo** dashboard and click the **Edit** (pencil) icon in th
 
 1. Switch to the **Attributes/Popup** tab in the layer editor.
 2. Find the `comid` row.
-3. Set its **Variable Input Name** to `river_id`.
+3. Set its **Alias** to "River ID".
+4. Set its **Variable Input Name** to `river_id`.
 
 > Setting a variable input name on an attribute means: whenever a user clicks a feature on the map, that feature's value for this attribute is written to the named variable input. Any visualization that references `${river_id}` will then re-fetch with the new value.
 
