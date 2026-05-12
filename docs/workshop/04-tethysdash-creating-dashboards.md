@@ -1,7 +1,3 @@
----
-title: "TethysDash: Creating Dashboards"
----
-
 # TethysDash: Creating Dashboards
 
 This tutorial walks through building a TethysDash dashboard that displays the GEOGLOWS Global Water Model river flowlines for China, with a user-selectable base map.
@@ -90,8 +86,9 @@ You should now be looking at a fresh dashboard containing one default grid item.
 
 ### Step 5 — Edit attributes and popup
 
-GEOGLOWS column names like `comid` and `geodesiclength` are not user-friendly. Trim the popup so it only shows useful fields by omitting the following from **Attributes/Popup**:
+GEOGLOWS column names like `objectid` and `shape` are not user-friendly. Trim the popup so it only shows useful fields by omitting the following from **Attributes/Popup**:
 
+- `objectid`
 - `outletcomid`
 - `region`
 - `vpu`
