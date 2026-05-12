@@ -17,7 +17,7 @@ This tutorial picks up where [TethysDash: Creating Dashboards](./04-tethysdash-c
 
 - Complete [TethysDash: Creating Dashboards](./04-tethysdash-creating-dashboards.md). You should have a dashboard named **GEOGLOWS Demo** that contains a Map of Chinese GEOGLOWS flowlines and a **Base Map** variable input.
 - A local installation of TethysDash, see [Installation and Setup -- TethysDash](https://tethysdash.readthedocs.io/en/latest/installation.html#quick-installation).
--  The [tethysdash_examples](https://github.com/FIRO-Tethys/tethysdash_examples) plugin package must be installed as a TethysDash dependency. It provides the `GeoGLOWS Forecast Plot` visualization used in this tutorial.
+- The [tethysdash_examples](https://github.com/FIRO-Tethys/tethysdash_examples) plugin package must be installed as a TethysDash dependency. It provides the `GeoGLOWS Forecast Plot` visualization used in this tutorial.
 
 ## Steps
 
