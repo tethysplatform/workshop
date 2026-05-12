@@ -66,11 +66,11 @@ You should now be looking at a fresh dashboard containing one default grid item.
 1. Click **Add Layer**.
 2. Configure the new layer as follows:
    - **Name:** `China Flowlines`
-   - **Min Zoom Query:** `14`
+   - **Min Zoom Query:** `12`
 
 ![Adding the China Flowlines layer](../images/1.3_add_layer.png)
 
-> **Why `Min Zoom Query`?** The GEOGLOWS service has hundreds of thousands of features. Setting a min zoom of `14` means popup queries (which fetch attributes for clicked features) only fire once the user has zoomed in far enough that the request is small and fast.
+> **Why `Min Zoom Query`?** The GEOGLOWS service has hundreds of thousands of features. Setting a min zoom of `12` means popup queries (which fetch attributes for clicked features) only fire once the user has zoomed in far enough that the request is small and fast.
 
 ### Step 4 — Edit the layer source
 
@@ -109,7 +109,7 @@ Click **Create** at the bottom of the layer editor. The layer collapses back int
 
 1. Expand the map editor's **Map Extent** section.
 2. Select **Use the Previewed Map Extent** option.
-3. Pan and zoom the map preview to China.
+3. Pan East and zoom the map preview to China. There is a known bug currently where panning west causes map extents to go beyond valid ranges and cause map layers to not render.
 
 ![Updated map extent zoomed to China](../images/1.7_updated_map_extent.png)
 
@@ -202,7 +202,7 @@ Click the dashboard **Save** (disk) icon in the toolbar once more to persist the
 ### Step 17 — Explore
 
 - Change the base map by opening the **Base Map** dropdown and picking a different option (e.g., an imagery base map). The base map should switch immediately while the flowlines stay in place.
-- Zoom in past zoom level 14 and click a river segment. The popup should show friendly aliases (e.g., `Mean Flow (m³/sec)` instead of `meanflow`) and hide the omitted fields.
+- Zoom in past zoom level 12 and click a river segment. The popup should show friendly aliases (e.g., `Mean Flow (m³/sec)` instead of `meanflow`) and hide the omitted fields.
 - The map service being used is very finnicky when clicking to get popups. You will need to zoom in very close to get popups to work. This is a quirk of the service and not TethysDash, but it is worth being aware of as you test the dashboard.
 - Refresh the page. The dashboard should reopen at the China extent you saved, with the topo base map selected by default.
 
