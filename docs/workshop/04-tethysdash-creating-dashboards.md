@@ -23,7 +23,7 @@ This tutorial walks through building a TethysDash dashboard that displays the GE
 
 1. Navigate to the TGF Portal: https://demo.tethysgeoscience.org/
 2. Press the Log In button and log in with your TGF Portal account. Use the Sign Up link to create an account if you don't have one.
-3. Go to the Apps page and launch the TethysDahs application.
+3. Go to the Apps page and launch the TethysDash application.
 
 ## Steps
 
