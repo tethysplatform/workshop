@@ -31,7 +31,7 @@ In a file browser change into your Home directory and open the tethysdev directo
 To test your newly scaffolded app, install it by running the following commands:
 
 ```bash
-cd tethysdev/tethysapp-earthquake_calculator
+cd ~/tethysdev/tethysapp-earthquake_calculator
 tethys install -d
 ```
 
@@ -42,6 +42,11 @@ tethys start
 ```
 
 Now, go to [localhost:8000](http://localhost:8000) to view your app in your browser.
+
+If prompted to login, use the default username and password:
+
+username: admin
+password: pass
 
 ## Customize Your App
 Now that you have your app running, let's customize it.
@@ -90,7 +95,7 @@ And if you go into your app, you would see something like this:
 
 To set the image that shows up for your app in the Tethys library and next to the app name, first add that image to the `public/images` directory inside your app files.
 
-Here is an example image to use: [Download Example App Icon](/img/getting-started/earthquake-app-icon.png)
+Here is an example image to use: [Download Example App Icon](/img/getting-started/earthquake-app-icon.png) Save the image as `earthquake-app-icon.png` in the `public/images` directory of the app.
 
 Then, change the icon attribute to the file name like so: 
 
@@ -105,10 +110,10 @@ Check out the app library to see your new app icon. It will also appear in the t
 To change the accent color used throughout your app, change the color to any hexcode color you'd like:
 
 ```python
-color='#0E4F57'
+color = '#0E4F57'
 ```
 
-After making these changes, just reload your app and you'll see them reflected in the browser inside your app.
+After making these changes, the development server should reload and then you can reload the page to the changes reflected in the browser.
 
 ## Customize Your Home Page
 
@@ -222,7 +227,7 @@ For now, the calculate button won't actually calculate anything. We'll change th
 
 ## Update Base Template
 
-For now, we are using the default version of what is called a base template. That template provides all of these highlighted portions of the page:
+We are currently using the default version of what is called a base template. That template provides all of these highlighted portions of the page:
 
 ![Base Template Explained](/img/getting-started/base-template-explained.png)
 
@@ -231,7 +236,7 @@ We can change that template, however. For our calculation page, we're going to u
 Change the top line of your `calculations.html` file to this: 
 
 ```html
-  {% extends "tethys_apps/app_two_columns.html" %}
+{% extends "tethys_apps/app_two_columns.html" %}
 ```
 Next, let's place the calculation inputs in the left column of your page.
 
@@ -267,7 +272,7 @@ Go ahead and refresh your page in the browser, and you'll see this:
 ## Add Form Submission
 Now, let's get your calculate button working. 
 
-For that we'll need to place your inputs into a `<form>`. This will allow the page to send the inputs' data together to your view to run the calculation and return data. 
+For that we'll need to place your inputs into a `<form>`. This will allow the page to send the input data together to your view to run the calculation and return data. 
 
 ### Add Custom Settings
 For our calculation, we'll be using some constants: 
@@ -316,12 +321,14 @@ Then scroll down to the CUSTOM SETTINGS section and set your `primary_velocity` 
 
 ![Custom settings section](/img/getting-started/custom-settings.png)
 
-We'll go over how to utilize these values in the next step.
+Finally, scroll down to the bottom of the page and press the `Save` button.
+
+We'll go over how to utilize these values in later on in the tutorial.
 
 ### Add a Form
 Now we'll need to add a form to the calculations page to handle submitting the inputs for calculations.
 
-Begin by making the following changes to `calculations.html`:
+Begin by putting the gizmo elements inside a new `<form>` element and add a `{% csrf_token %}` element in the `calculations.html` as shown below:
 
 ```html {2-3,9}
 {% block app_content_lc %}
@@ -482,38 +489,38 @@ Go ahead and refresh your page, and run your calculations one more time. This ti
 Now, let's replace that bar plot with an interactive map. We're going to change a few elements of your application now as well. Begin by removing the second set of inputs and renaming your gizmos and variables to reflect that. Go ahead and remove the calculations being performed and the bar plot gizmo here as well:
 
 ``` python {1,6-8,10-16,18-20,22,29-30}
-    from tethys_sdk.gizmos import MapView
-    
-    
-    @controller(name="calculate", url='calculate')
-    def calculate(request):
-        primary_time_difference = TextInput(name='primary_time_difference', display_text='Primary Time Difference (seconds)', placeholder='e.g. 10', attributes={'type': 'number'})
-        secondary_time_difference = TextInput(name='secondary_time_difference', display_text='Secondary Time Difference (seconds)', placeholder='e.g. 20', attributes={'type': 'number'})
-        calculate_button = Button(display_text='Calculate', name='calculate_button', icon='calculator', submit=True, attributes={'class': 'btn btn-primary'})
+from tethys_sdk.gizmos import MapView
 
-        map_view_options = {
-            'height': '400px',
-            'width': '100%',
-            'controls': 'default',
-            'basemap': ['OpenStreetMap'],
-        }
-        map_view = MapView(**map_view_options)
 
-        context = {
-            'primary_time_difference': primary_time_difference,
-            'secondary_time_difference': secondary_time_difference,
-            'calculate_button': calculate_button,
-            'map_view': map_view
-        }
+@controller(name="calculate", url='calculate')
+def calculate(request):
+    primary_time_difference = TextInput(name='primary_time_difference', display_text='Primary Time Difference (seconds)', placeholder='e.g. 10', attributes={'type': 'number'})
+    secondary_time_difference = TextInput(name='secondary_time_difference', display_text='Secondary Time Difference (seconds)', placeholder='e.g. 20', attributes={'type': 'number'})
+    calculate_button = Button(display_text='Calculate', name='calculate_button', icon='calculator', submit=True, attributes={'class': 'btn btn-primary'})
 
-        if request.method == "POST":
-            primary_velocity = App.get_custom_setting('primary_velocity')
-            secondary_velocity = App.get_custom_setting('secondary_velocity')
+    map_view_options = {
+        'height': '400px',
+        'width': '100%',
+        'controls': 'default',
+        'basemap': ['OpenStreetMap'],
+    }
+    map_view = MapView(**map_view_options)
 
-            primary_time_difference_value = float(request.POST.get('primary_time_difference'))
-            secondary_time_difference_value = float(request.POST.get('secondary_time_difference'))
+    context = {
+        'primary_time_difference': primary_time_difference,
+        'secondary_time_difference': secondary_time_difference,
+        'calculate_button': calculate_button,
+        'map_view': map_view
+    }
 
-        return App.render(request, 'calculations.html', context)
+    if request.method == "POST":
+        primary_velocity = App.get_custom_setting('primary_velocity')
+        secondary_velocity = App.get_custom_setting('secondary_velocity')
+
+        primary_time_difference_value = float(request.POST.get('primary_time_difference'))
+        secondary_time_difference_value = float(request.POST.get('secondary_time_difference'))
+
+    return App.render(request, 'calculations.html', context)
 ```
 
 Next, replace the time difference gizmos inside `calculations.html` and add the MapView gizmo to your page inside the template by replacing the contents of the 'app_content_rc' block:
@@ -756,93 +763,93 @@ For this visualization, we're not only going to create a circle, we're going to 
 Now add some style information to apply to this visual data:
 
 ```python {27-58}
-circle_geojson = {
-    "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "LineString",
-                "coordinates": circle_coordinates
+    circle_geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": circle_coordinates
+                },
             },
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [center_lon, center_lat]
-            },
-            "properties": {
-                "distance": distance,
-                "primary_time_difference": primary_time_difference_value,
-                "secondary_time_difference": secondary_time_difference_value,
-                "primary_velocity": primary_velocity,
-                "secondary_velocity": secondary_velocity
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [center_lon, center_lat]
+                },
+                "properties": {
+                    "distance": distance,
+                    "primary_time_difference": primary_time_difference_value,
+                    "secondary_time_difference": secondary_time_difference_value,
+                    "primary_velocity": primary_velocity,
+                    "secondary_velocity": secondary_velocity
+                }
             }
-        }
-    ]
-}
-
-style_map = {
-    "Point": {
-        "ol.style.Style": {
-            "image": {
-                "ol.style.Circle": {
-                    "radius": 6,
-                    "fill": {
-                        "ol.style.Fill": {
-                            "color": "#663399"
-                        }
-                    },
-                    "stroke": {
-                        "ol.style.Stroke": {
-                            "color": "#fff",
-                            "width": 2
+        ]
+    }
+    
+    style_map = {
+        "Point": {
+            "ol.style.Style": {
+                "image": {
+                    "ol.style.Circle": {
+                        "radius": 6,
+                        "fill": {
+                            "ol.style.Fill": {
+                                "color": "#663399"
+                            }
+                        },
+                        "stroke": {
+                            "ol.style.Stroke": {
+                                "color": "#fff",
+                                "width": 2
+                            }
                         }
                     }
                 }
             }
-        }
-    },
-    "LineString": {
-        "ol.style.Style": {
-            "stroke": {
-                "ol.style.Stroke": {
-                    "color": "#1D5706",
-                    "width": 2
+        },
+        "LineString": {
+            "ol.style.Style": {
+                "stroke": {
+                    "ol.style.Stroke": {
+                        "color": "#1D5706",
+                        "width": 2
+                    }
                 }
             }
         }
     }
-}
 ```
 
 Next, create the Layer to put on the map with that geojson data:
  
 ```python {14-25}
-...
-    "LineString": {
-        "ol.style.Style": {
-            "stroke": {
-                "ol.style.Stroke": {
-                    "color": "#1D5706",
-                    "width": 2
+    ...
+        "LineString": {
+            "ol.style.Style": {
+                "stroke": {
+                    "ol.style.Stroke": {
+                        "color": "#1D5706",
+                        "width": 2
+                    }
                 }
             }
         }
     }
-}
-
-circle_layer = MVLayer(
-    source='GeoJSON',
-    options=circle_geojson,
-    layer_options={
-        "style_map": style_map
-    },
-
-    legend_title='Earthquake Distance',
-)
-layers.append(circle_layer)
+    
+    circle_layer = MVLayer(
+        source='GeoJSON',
+        options=circle_geojson,
+        layer_options={
+            "style_map": style_map
+        },
+    
+        legend_title='Earthquake Distance',
+    )
+    layers.append(circle_layer)
 ```
 
 Before you can test this, you'll need to move the MapView gizmo down in your code, just above the page render:
@@ -893,7 +900,7 @@ The next step to building out this app will be adding a new map with a large map
 
 We'll be using the [Tethys Paths API](https://docs.tethysplatform.org/en/latest/tethys_sdk/paths.html) to provide a directory to save these results to. For this example, we'll use the `app_workspace` directory 
 
-Start by updating your controller definition like so:
+Start by adding `app_workspace=True` to your controller decorator and the `app_workspace` argument to your controller like so:
 
 ```python {1-2}
 @controller(name="calculate", url='calculate', app_workspace=True)
@@ -963,7 +970,7 @@ Begin by adding the following code to your `controllers.py` file:
 from tethys_sdk.layouts import MapLayout
 ...
 
-@controller(name="view_all_earthquakes", url="all_earthquakes", app_workspace=True)
+@controller(name="view_all_earthquakes", url="view-all-earthquakes", app_workspace=True)
 class CalculationResultMapLayout(MapLayout):
     app = App
     base_template = 'earthquake_calculator/base.html'
@@ -1015,7 +1022,7 @@ Finally, you'll need to create a layer on your MapLayout map with the stored mea
 Begin by adding the `compose_layers` method to your MapLayout controller class in `controllers.py`:
 
 ```python {5-30}
-@controller(name="view_all_earthquakes", url="view_all_earthquakes", app_workspace=True)
+@controller(name="view_all_earthquakes", url="view-all-earthquakes", app_workspace=True)
 class CalculationResultMapLayout(MapLayout):
     ...
 
@@ -1060,7 +1067,7 @@ These additions will allow you to click on the center points of the circles disp
 Begin by updating your MapLayout class:
 
 ```python {11-12}
-@controller(name="view_all_earthquakes", url="view_all_earthquakes", app_workspace=True)
+@controller(name="view_all_earthquakes", url="view-all-earthquakes", app_workspace=True)
 class CalculationResultMapLayout(MapLayout):
     app = App
     base_template = 'earthquake_calculator/base.html'
@@ -1079,7 +1086,7 @@ Next, in order to calculate the graph data needed, add the following code to you
 ```python {1,7-84}
 import numpy as np
 
-@controller(name="view_all_earthquakes", url="view_all_earthquakes", app_workspace=True)
+@controller(name="view_all_earthquakes", url="view-all-earthquakes", app_workspace=True)
 class CalculationResultMapLayout(MapLayout):
     ...
 
