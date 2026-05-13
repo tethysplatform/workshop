@@ -117,7 +117,6 @@ Click **Create** at the bottom of the layer editor. The layer collapses back int
 
 1. Expand the map editor's **Map Extent** section.
 2. Select **Use the Previewed Map Extent** option.
-3. Pan East and zoom the map preview to China. There is a known bug currently where panning west causes map extents to go beyond valid ranges and cause map layers to not render.
 
 ![Updated map extent zoomed to China](../images/1.7_updated_map_extent.png)
 
