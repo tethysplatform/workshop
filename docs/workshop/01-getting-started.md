@@ -26,6 +26,27 @@ You will be prompted to enter metadata about the app such as, proper name, versi
 
 In a file browser change into your Home directory and open the tethysdev directory. If the scaffolding worked, you should see a directory called tethysapp-earthquake_calculator. All of the source code for your app is located in this directory.
 
+```text 
+tethysapp-earthquake_calculator/
+├── install.yml                       
+├── pyproject.toml                          
+└── tethysapp/                        
+    └── earthquake_calculator/                 
+        ├── __init__.py
+        ├── app.py                    
+        ├── controllers.py                              
+        ├── public/                   
+        │   ├── css/
+        │   ├── images/
+        │   └── js/
+        ├── resources/
+        ├── templates/
+        │   └── earthquake_calculator/
+        │       ├── base.html
+        │       └── home.html
+        └── tests/
+```
+
 ## Install App
 
 To test your newly scaffolded app, install it by running the following commands:
@@ -323,7 +344,7 @@ Then scroll down to the CUSTOM SETTINGS section and set your `primary_velocity` 
 
 Finally, scroll down to the bottom of the page and press the `Save` button.
 
-We'll go over how to utilize these values in later on in the tutorial.
+We'll go over how to utilize these values later on in the tutorial.
 
 ### Add a Form
 Now we'll need to add a form to the calculations page to handle submitting the inputs for calculations.
