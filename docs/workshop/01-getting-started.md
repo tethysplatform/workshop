@@ -26,7 +26,7 @@ You will be prompted to enter metadata about the app such as, proper name, versi
 
 In a file browser change into your Home directory and open the tethysdev directory. If the scaffolding worked, you should see a directory called tethysapp-earthquake_calculator. All of the source code for your app is located in this directory.
 
-```text title="Default App Directory"
+```text title="Scaffolded App Directory"
 tethysapp-earthquake_calculator/
 ├── install.yml                       
 ├── pyproject.toml                          
@@ -46,6 +46,18 @@ tethysapp-earthquake_calculator/
         │       └── home.html
         └── tests/
 ```
+
+Here's what each file or directory contains:
+
+- **install.yml**: Configuration file for installing the app dependencies and settings
+- **pyproject.toml**: Project metadata and dependencies configuration
+- **tethysapp/**: Main package directory containing all app source code
+- **app.py**: Core app class and configuration (name, icon, color, etc.)
+- **controllers.py**: View functions and request handlers
+- **public/**: Static files including stylesheets, images, and JavaScript
+- **resources/**: App resources
+- **templates/**: HTML templates for page contents
+- **tests/**: Unit tests for your app
 
 ## Install App
 
