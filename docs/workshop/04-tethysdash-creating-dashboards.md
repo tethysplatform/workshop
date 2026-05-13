@@ -11,9 +11,9 @@ This tutorial walks through building a TethysDash dashboard that displays the GE
 
 ## Prerequisites
 
-- Be comfortable with the TethysDash landing page
-- Be comfortable creating and editing dashboard items
-- Know what Variable Inputs and Maps are in TethysDash
+- Be comfortable with the [TethysDash landing page](https://tethysdash.readthedocs.io/en/latest/landing_page.html)
+- Be comfortable [creating and editing dashboard items](https://tethysdash.readthedocs.io/en/latest/dashboard_editing.html)
+- Know what [Variable Inputs](https://tethysdash.readthedocs.io/en/latest/variable_inputs.html) and [Maps](https://tethysdash.readthedocs.io/en/latest/maps/maps.html) are in TethysDash
 
 ## Login to the TGF Portal
 
@@ -61,6 +61,8 @@ You should now be looking at a fresh dashboard containing one default grid item.
 
 ![Map with a base map selected](../images/1.2_map_with_basemap.png)
 
+> See [Creating a Map](https://tethysdash.readthedocs.io/en/latest/maps/create_map.html) for the full Map editor reference.
+
 ### Step 3 — Add the map layer
 
 1. Click **Add Layer**.
@@ -71,6 +73,8 @@ You should now be looking at a fresh dashboard containing one default grid item.
 ![Adding the China Flowlines layer](../images/1.3_add_layer.png)
 
 > **Why `Min Zoom Query`?** The GEOGLOWS service has hundreds of thousands of features. Setting a min zoom of `12` means popup queries (which fetch attributes for clicked features) only fire once the user has zoomed in far enough that the request is small and fast.
+>
+> See the [Layer tab reference](https://tethysdash.readthedocs.io/en/latest/maps/layer_tab.html) for all layer-level options.
 
 ### Step 4 — Edit the layer source
 
@@ -83,6 +87,8 @@ You should now be looking at a fresh dashboard containing one default grid item.
 ![Configuring the layer source](../images/1.4_layer_source.png)
 
 > **Why `params - LAYERDEFS`?** The GEOGLOWS service covers the entire globe. Setting a layer definition query filters the service to only return river segments in China, which is much more performant and relevant for this dashboard. The value must be valid JSON with double quotes, and the layer index (`0`) is required to target the correct sublayer.
+>
+> See the [Source tab reference](https://tethysdash.readthedocs.io/en/latest/maps/source_tab.html) for every supported source type and its props.
 
 ### Step 5 — Edit attributes and popup
 
@@ -98,6 +104,8 @@ GEOGLOWS column names like `objectid` and `shape` are not user-friendly. Trim th
 - `shape`
 
 ![Configuring attribute aliases and popup fields](../images/1.5_layer_attributes.png)
+
+> See [Attributes and Popups](https://tethysdash.readthedocs.io/en/latest/maps/attributes_and_popups_tab.html) for the full set of aliasing, omission, and click-binding options.
 
 ### Step 6 — Save the layer
 
@@ -141,6 +149,8 @@ Explore the map preview and test that the popups work. Don't worry about the bas
 
 ![Enabling unrestricted grid item placement](../images/1.10_save_unrestricted_grid_item_placement.png)
 
+> See [Dashboard Settings](https://tethysdash.readthedocs.io/en/latest/dashboard_settings.html) for every option in the gear pane.
+
 ### Step 11 — Re-enter edit mode
 
 Click the **Edit** (pencil) icon to re-enter edit mode. You will now add a Variable Input.
@@ -165,6 +175,8 @@ Click the **Edit** (pencil) icon to re-enter edit mode. You will now add a Varia
 ![Configuring the Base Map variable input](../images/1.12_variable_input_setup.png)
 
 > `Base Map Layers` is a built-in options source that exposes TethysDash's curated list of base map URLs. Using it here means the dropdown is automatically populated with valid base map services.
+>
+> See [Variable Inputs](https://tethysdash.readthedocs.io/en/latest/variable_inputs.html) for all built-in options sources and how to define custom ones.
 
 6. In the variable input editor preview, click the dropdown and select an initial base map (for example, `World Topo Map`).
 7. Click **Save** at the bottom of the variable input editor.
@@ -190,6 +202,8 @@ ${Base Map}
 ![Binding the map's Base Map to the variable input](../images/1.14_connect_variable_input.png)
 
 The `${...}` syntax tells TethysDash to substitute in the current value of the variable input named `Base Map` whenever the map renders. Whenever the user picks a different option from the dropdown, the map re-renders with the new base map URL.
+
+> See [Variable Inputs](https://tethysdash.readthedocs.io/en/latest/variable_inputs.html) for the full template-substitution semantics.
 
 ### Step 15 — Save the map
 

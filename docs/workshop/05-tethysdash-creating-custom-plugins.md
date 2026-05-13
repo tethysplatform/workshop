@@ -40,13 +40,15 @@ Open your **GEOGLOWS Demo** dashboard and click the **Edit** (pencil) icon in th
 ![Setting the river_id variable input on the comid attribute](../images/2.3_update_attribute_variable.png)
 
 > Setting a variable input name on an attribute means: whenever a user clicks a feature on the map, that feature's value for this attribute is written to the named variable input. Any visualization that references `${river_id}` will then re-fetch with the new value.
+>
+> See [Attributes and Popups](https://tethysdash.readthedocs.io/en/latest/maps/attributes_and_popups_tab.html) for the full reference on attribute aliases and click-to-variable bindings.
 
 4. Click **Create** at the bottom of the layer editor.
 5. Click **Save** at the bottom of the map editor.
 
 ### Step 4 — Inspect the GeoGLOWS Forecast Plot plugin
 
-The visualization you are about to add is provided by a TethysDash _visualization plugin_ — an external Python package that subclasses `TethysDashPlugin` and is auto-discovered when installed alongside TethysDash.
+The visualization you are about to add is provided by a TethysDash _visualization plugin_ — an external Python package that subclasses `TethysDashPlugin` and is auto-discovered when installed alongside TethysDash. The [Plugins](https://tethysdash.readthedocs.io/en/latest/plugins.html) page is the full reference for the plugin API: every supported `type`, every `args` field type, `send_update`, packaging, and discovery.
 
 Here is the full source for the `GeoGLOWS Forecast Plot` plugin from the [tethysdash_examples](https://github.com/FIRO-Tethys/tethysdash_examples) repository:
 
@@ -154,6 +156,8 @@ Until the user clicks a river, `river_id` has no value. Configure a friendly pla
 3. Set the **Background Color** to `#dbdbdb` (light grey).
 
 ![Configuring the plot's placeholder and background](../images/2.7_plot_settings.png)
+
+> See [Dashboard Visualizations](https://tethysdash.readthedocs.io/en/latest/dashboard_visualizations.html) for every option in the visualization Settings tab.
 
 ### Step 8 — Save the item
 
