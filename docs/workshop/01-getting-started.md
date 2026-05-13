@@ -148,6 +148,57 @@ color = '#0E4F57'
 
 After making these changes, the development server should reload and then you can reload the page to the changes reflected in the browser.
 
+### Add Custom Settings
+Soon we'll be adding calculations that your app will run. For those calculations, we'll be using some constants: 
+'primary velocity' and 'secondary velocity'. 
+
+You'll now add two custom settings to your app. This will be saved for all users. You'll be able to set these values in the UI inside your Tethys Portal.
+
+To add these settings add the following code to your `app.py` file:
+
+```python {1,6-22}
+from tethys_sdk.app_settings import CustomSetting
+
+class App(TethysAppBase):
+    ...
+
+    def custom_settings(self):
+        custom_settings = (
+            CustomSetting(
+                name='primary_velocity',
+                type=CustomSetting.TYPE_FLOAT,
+                description='Average Primary velocity (km/s)',
+                required=True,
+            ), 
+            CustomSetting(
+                name='secondary_velocity',
+                type=CustomSetting.TYPE_FLOAT,
+                description='Average Secondary velocity (km/s)',
+                required=True,
+            ),
+        )
+
+        return custom_settings
+```
+
+Now you can set these values in your app settings by following these steps:
+
+Begin by clicking the settings icon in the top right corner of your app:
+
+![App settings icon in app](/img/getting-started/app-settings-icon-in-app.png)
+
+You can also access your app's settings from the app library page by hovering over your app icon and clicking the settings icon in the top left corner.
+
+![App settings icon in app library](/img/getting-started/app-settings-icon-in-library.png)
+
+Then scroll down to the CUSTOM SETTINGS section and set your `primary_velocity` and `secondary_velocity` values:
+
+![Custom settings section](/img/getting-started/custom-settings.png)
+
+Finally, scroll down to the bottom of the page and press the `Save` button.
+
+We'll go over how to utilize these values later on in the tutorial.
+
 ## Customize Your Home Page
 
 Now, let's try changing the contents of your home page by editing the contents of `templates/home.html`.
@@ -299,64 +350,10 @@ Go ahead and refresh your page in the browser, and you'll see this:
 
 ![Switched to Two Column Template](/img/getting-started/two-column-template.png)
 
-
-
-
 ## Add Form Submission
 Now, let's get your calculate button working. 
 
 For that we'll need to place your inputs into a `<form>`. This will allow the page to send the input data together to your view to run the calculation and return data. 
-
-### Add Custom Settings
-For our calculation, we'll be using some constants: 
-'primary velocity' and 'secondary velocity'. 
-
-You'll now add two custom settings to your app. This will be saved for all users. You'll be able to set these values in the UI inside your Tethys Portal.
-
-To add these settings add the following code to your `app.py` file:
-
-```python {1,6-22}
-from tethys_sdk.app_settings import CustomSetting
-
-class App(TethysAppBase):
-    ...
-
-    def custom_settings(self):
-        custom_settings = (
-            CustomSetting(
-                name='primary_velocity',
-                type=CustomSetting.TYPE_FLOAT,
-                description='Average Primary velocity (km/s)',
-                required=True,
-            ), 
-            CustomSetting(
-                name='secondary_velocity',
-                type=CustomSetting.TYPE_FLOAT,
-                description='Average Secondary velocity (km/s)',
-                required=True,
-            ),
-        )
-
-        return custom_settings
-```
-
-Now you can set these values in your app settings by following these steps:
-
-Begin by clicking the settings icon in the top right corner of your app:
-
-![App settings icon in app](/img/getting-started/app-settings-icon-in-app.png)
-
-You can also access your app's settings from the app library page by hovering over your app icon and clicking the settings icon in the top left corner.
-
-![App settings icon in app library](/img/getting-started/app-settings-icon-in-library.png)
-
-Then scroll down to the CUSTOM SETTINGS section and set your `primary_velocity` and `secondary_velocity` values:
-
-![Custom settings section](/img/getting-started/custom-settings.png)
-
-Finally, scroll down to the bottom of the page and press the `Save` button.
-
-We'll go over how to utilize these values later on in the tutorial.
 
 ### Add a Form
 Now we'll need to add a form to the calculations page to handle submitting the inputs for calculations.
