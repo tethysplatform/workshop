@@ -1,0 +1,129 @@
+{
+  "name": "GEOGLOWS Demo (Part 2)",
+  "description": "demo",
+  "publicDashboard": false,
+  "userPermission": "admin",
+  "permissions": [
+    {
+      "username": "admin",
+      "permission": "admin"
+    }
+  ],
+  "unrestrictedPlacement": true,
+  "image": "/media/tethysdash/app/e9a4079f-b5fd-45ed-821f-c88e96c7874f.png",
+  "owner": "admin",
+  "notes": "",
+  "tabs": [
+    {
+      "id": 158,
+      "name": "Main",
+      "gridItems": [
+        {
+          "i": "1",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 43,
+          "source": "Map",
+          "args_string": {
+            "baseMap": "${Base Map}",
+            "layerControl": true,
+            "layers": [
+              {
+                "configuration": {
+                  "type": "ImageLayer",
+                  "props": {
+                    "name": "China Flowlines",
+                    "minZoomQuery": "14",
+                    "source": {
+                      "type": "ESRI Image and Map Service",
+                      "props": {
+                        "url": "https://livefeeds3.arcgis.com/arcgis/rest/services/GEOGLOWS/GlobalWaterModel_Medium/MapServer",
+                        "params": {
+                          "LAYERDEFS": "{\"0\": \"rivercountry = 'China'\"}"
+                        }
+                      }
+                    }
+                  }
+                },
+                "attributeAliases": {
+                  "Flow Forecast (m³/sec)": {
+                    "objectid": "OBJECTID",
+                    "comid": "TDX Hydro Link Number",
+                    "outletcomid": "Terminal TDX Hydro Link Number",
+                    "region": "TDX Hydro Region Number",
+                    "vpu": "TDX Sub Basin Id",
+                    "upstreamarea": "Upstream Drainage Area (m²)",
+                    "geodesiclength": "Geodesic Stream Length (m)",
+                    "streamorder": "Strahler Stream Order",
+                    "rivercountry": "River Country Name",
+                    "outletcountry": "Outlet Country Name",
+                    "timevalue": "Forecast Timestamp",
+                    "meanflow": "Mean Flow (m³/sec)",
+                    "thickness": "Line Class",
+                    "returnperiod": "Return Period",
+                    "shape": "Shape"
+                  }
+                },
+                "attributeVariables": {
+                  "Flow Forecast (m³/sec)": {
+                    "comid": "river_id"
+                  }
+                },
+                "omittedPopupAttributes": {
+                  "Flow Forecast (m³/sec)": [
+                    "objectid",
+                    "outletcomid",
+                    "region",
+                    "vpu",
+                    "rivercountry",
+                    "outletcountry",
+                    "thickness",
+                    "shape"
+                  ]
+                }
+              }
+            ],
+            "map_extent": {
+              "extent": "12024911.41,3216959.30,4.03"
+            },
+            "mapDrawing": {}
+          },
+          "metadata_string": {}
+        },
+        {
+          "i": "2",
+          "x": 0,
+          "y": 0,
+          "w": 18,
+          "h": 5,
+          "source": "Variable Input",
+          "args_string": {
+            "variable_name": "Base Map",
+            "show_label": true,
+            "variable_options_source": "Base Map Layers",
+            "initial_value": "https://server.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer"
+          },
+          "metadata_string": {}
+        },
+        {
+          "i": "3",
+          "x": 0,
+          "y": 26,
+          "w": 100,
+          "h": 17,
+          "source": "geoglows_forecast_plot",
+          "args_string": {
+            "river_ID": "${river_id}"
+          },
+          "metadata_string": {
+            "backgroundColor": "#dbdbdb",
+            "customMessaging": {
+              "anyEmptyVariable": "Click on a river to see the GeoGLOWS forecast"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
