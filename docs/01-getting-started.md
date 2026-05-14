@@ -121,18 +121,18 @@ name = 'My Brand New App'
 
 You'll then see this in the app library:
 
-![Updated App Name in App Library](/img/getting-started/updated-name-app-library.png)
+![Updated App Name in App Library](./images/getting-started/updated-name-app-library.png)
 
 And if you go into your app, you would see something like this:
 
-![Updated App Name in App](/img/getting-started/updated-name-app.png)
+![Updated App Name in App](./images/getting-started/updated-name-app.png)
 
 
 ### App Icon
 
 To set the image that shows up for your app in the Tethys library and next to the app name, first add that image to the `public/images` directory inside your app files.
 
-Here is an example image to use: [Download Example App Icon](/img/getting-started/earthquake-app-icon.png) Save the image as `earthquake-app-icon.png` in the `public/images` directory of the app.
+Here is an example image to use: [Download Example App Icon](./images/getting-started/earthquake-app-icon.png) Save the image as `earthquake-app-icon.png` in the `public/images` directory of the app.
 
 Then, change the icon attribute to the file name like so: 
 
@@ -189,15 +189,15 @@ Now you can set these values in your app settings by following these steps:
 
 Begin by clicking the settings icon in the top right corner of your app:
 
-![App settings icon in app](/img/getting-started/app-settings-icon-in-app.png)
+![App settings icon in app](./images/getting-started/app-settings-icon-in-app.png)
 
 You can also access your app's settings from the app library page by hovering over your app icon and clicking the settings icon in the top left corner.
 
-![App settings icon in app library](/img/getting-started/app-settings-icon-in-library.png)
+![App settings icon in app library](./images/getting-started/app-settings-icon-in-library.png)
 
 Then scroll down to the CUSTOM SETTINGS section and set your `primary_velocity` and `secondary_velocity` values:
 
-![Custom settings section](/img/getting-started/custom-settings.png)
+![Custom settings section](./images/getting-started/custom-settings.png)
 
 Finally, scroll down to the bottom of the page and press the `Save` button.
 
@@ -309,7 +309,7 @@ Now that you've defined these gizmos, you'll need to add them to your page insid
 
 After refreshing the page in your browser, you should see the form with 4 inputs and a "Calculate" button just like this: 
 
-![Calculation Form Added to Page](/img/getting-started/calculation-form-added.png)
+![Calculation Form Added to Page](./images/getting-started/calculation-form-added.png)
 
 
 For now, the calculate button won't actually calculate anything. We'll change that soon.
@@ -325,7 +325,7 @@ To learn more about Tethys Gizmos see the following links:
 
 We are currently using the default version of what is called a base template. That template provides all of these highlighted portions of the page:
 
-![Base Template Explained](/img/getting-started/base-template-explained.png)
+![Base Template Explained](./images/getting-started/base-template-explained.png)
 
 We can change that template, however. For our calculation page, we're going to use a base template that provides two columns with no navigation bar on the side.
 
@@ -360,7 +360,7 @@ Add the following to `calculations.html`:
 
 Go ahead and refresh your page in the browser, and you'll see this:
 
-![Switched to Two Column Template](/img/getting-started/two-column-template.png)
+![Switched to Two Column Template](./images/getting-started/two-column-template.png)
 
 :::tip
 To learn more about templates, along with a full list of base templates that are available with Tethys Platform, check out [App Templating](https://docs.tethysplatform.org/en/stable/tethys_sdk/templating.html)
@@ -475,7 +475,7 @@ Now, let's render those results in the template. This template will render regar
 
 Now go ahead and refresh the page, and test the calculations again. You should see your results show up in the right column of your page like so:
 
-![Distances rendered in right column](/img/getting-started/distances-displayed.png)
+![Distances rendered in right column](./images/getting-started/distances-displayed.png)
 
 ## Add Plot Graphic
 
@@ -528,7 +528,7 @@ Now, let's add this bar plot to your page:
 
 Go ahead and refresh your page, and run your calculations one more time. This time, you should see a beautiful graph pop up with your calculation results. 
 
-![Bar Plot Graph Rendered](/img/getting-started/bar-plot.png)
+![Bar Plot Graph Rendered](./images/getting-started/bar-plot.png)
 
 :::tip
 To learn more about the BarPlot Gizmo, along with other plot Gizmos available with Tethys Platform, see [Plot View](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos/plot_view.html)
@@ -592,7 +592,7 @@ Next, replace the time difference gizmos inside `calculations.html` and add the 
 
 Now open your app and refresh the page in your browser and you'll see the following:
 
-![Added MapView](/img/getting-started/added-map-view.png)
+![Added MapView](./images/getting-started/added-map-view.png)
 
 :::tip
 To learn more about the MapView Gizmo, see [MapView](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos/map_view.html)
@@ -951,7 +951,7 @@ def calculate(request):
 
 Now go ahead and open your app and input some values to your form and place a point on the map and hit "Calculate" to see the results on your map!
 
-![Circle Rendered On Map](/img/getting-started/circle-rendered-on-map.png)
+![Circle Rendered On Map](./images/getting-started/circle-rendered-on-map.png)
 
 
 ## Save Calculation Results
@@ -1082,7 +1082,7 @@ Next, place that gizmo in your calculations template:
 ```
 Now open your calculations page and click on the new button! This should take you to a new page with a full-sized map:
 
-![New MapLayout Page](/img/getting-started/new-maplayout-page.png)
+![New MapLayout Page](./images/getting-started/new-maplayout-page.png)
 
 :::tip
 To learn more about Map Layout, see [Map Layout](https://docs.tethysplatform.org/en/stable/tethys_sdk/layouts/map_layout.html)
@@ -1129,7 +1129,7 @@ class CalculationResultMapLayout(MapLayout):
 
 Now, make sure you've added some measurements to your stored `measurements.json` file, then navigate to the "View all earthquakes" page. On the map you should see all of your stored earthquake records
 
-![Earthquakes Rendering on MapLayout Map](/img/getting-started/earthquakes-on-maplayout.png)
+![Earthquakes Rendering on MapLayout Map](./images/getting-started/earthquakes-on-maplayout.png)
 
 
 ## Add a Plot
@@ -1244,7 +1244,7 @@ class CalculationResultMapLayout(MapLayout):
 
 Now go ahead and refresh your app, and click on any center point inside the earthquake circles on the map, and click "Plot" in the popup that appears. You should see something like this:
 
-![Plot Data Display](/img/getting-started/plot-data.png)
+![Plot Data Display](./images/getting-started/plot-data.png)
 
 # Wrapping Up
 

@@ -27,9 +27,13 @@ All tutorial content lives directly under `docs/`. The sidebar is **auto-generat
 - **Numeric filename prefixes drive tutorial order** — `01-getting-started.md`, `02-component-applications.md`, etc. To insert or reorder tutorials, rename files; do not edit `sidebars.js`.
 - Use `.md` for plain Markdown; use `.mdx` when a tutorial needs React components. The TethysDash plugins tutorial (`04-...mdx`) uses `Tabs`/`TabItem` from `@theme/Tabs` to present two alternative implementation paths (Grid Item vs. Popup Modal) for the same dashboard feature — see that file for the pattern.
 
-Images live in `docs/images/` and are referenced from the TethysDash tutorials as `./images/filename.png`. Tutorial 1 references images from `static/img/getting-started/...` instead (absolute path under the static folder). Filenames in `docs/images/` follow a `<section>.<step>_description.png` convention (e.g. `2.6_plot_setup.png`).
+## Asset layout (canonical)
 
-**Dashboard JSON files in `docs/`** (e.g. `GEOGLOWS_China_TethysDash.json`, `..._Part2.json`, `..._Part2_Popup_Modal.json`) are **reference solutions** — exported TethysDash dashboards that workshop participants can import if they get stuck or want to skip ahead. They are not rendered by Docusaurus; they're served as static assets users download. When updating a tutorial's steps, keep the matching solution JSON in sync.
+This project follows Docusaurus's recommendation to **co-locate tutorial assets with the docs that reference them**. Two distinct roots:
+
+- **`docs/images/<tutorial-slug>/`** — tutorial screenshots, organized into one subfolder per tutorial, matching the tutorial's URL slug. Referenced from each tutorial with relative paths like `./images/getting-started/added-map-view.png` or `./images/tethysdash-creating-dashboards/1.2_edit_icon.png`. The TethysDash tutorials use a `<section>.<step>_description.png` filename convention (e.g. `2.6_plot_setup.png`); the getting-started tutorial uses kebab-case names. When adding a new tutorial, create a matching subfolder under `docs/images/`.
+- **`docs/*.json`** — tutorial solution downloads (e.g. `GEOGLOWS_China_TethysDash.json`, `..._Part2.json`, `..._Part2_Popup_Modal.json`). Referenced from tutorials with relative paths (`./GEOGLOWS_*.json`). Co-located so the download link travels with the tutorial. When updating a tutorial's steps, keep the matching solution JSON in sync.
+- **`static/img/`** — **site-level assets only** (favicon, logos, social card, SVG illustrations used by React components in `src/`). Referenced from React/config with absolute paths like `/img/favicon.ico`. Do **not** put tutorial screenshots here.
 
 ## Site configuration
 
