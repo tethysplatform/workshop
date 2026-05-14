@@ -68,7 +68,7 @@ Open the tethysapp-well_drawdown_calculator folder in your favorite IDE. The mai
 tethysapp/well_drawdown_calculator/app.py
 ```
 
-The `app.py` file is a basic starting point for building any app. In it you will find an `App` class and a `home` function decoarted with the `@App.page` decorator.
+The `app.py` file is a basic starting point for building any app. In it you will find an `App` class and a `home` function decorated with the `@App.page` decorator.
 
 ---
 
