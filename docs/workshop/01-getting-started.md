@@ -1177,27 +1177,27 @@ class CalculationResultMapLayout(MapLayout):
         distance = float(feature_props.get('distance'))
         sp_gap = s_time - p_time
 
-        # Theoretical travel time lines
+        # Average travel time lines
         max_dist = max(distance * 2, 100)
         dist_range = np.linspace(0, max_dist, 200).tolist()
         p_line = (np.array(dist_range) / p_velocity).tolist()
         s_line = (np.array(dist_range) / s_velocity).tolist()
 
         data = [
-            # Theoretical P-wave line
+            # Average P-wave line
             {
                 'x': dist_range,
                 'y': p_line,
                 'mode': 'lines',
-                'name': 'P-wave (theoretical)',
+                'name': 'P-wave (average)',
                 'line': {'color': '#2196F3', 'width': 2, 'dash': 'dash'},
             },
-            # Theoretical S-wave line
+            # Average S-wave line
             {
                 'x': dist_range,
                 'y': s_line,
                 'mode': 'lines',
-                'name': 'S-wave (theoretical)',
+                'name': 'S-wave (average)',
                 'line': {'color': '#FF5722', 'width': 2, 'dash': 'dash'},
             },
             # Incident P arrival point
