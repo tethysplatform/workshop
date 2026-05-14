@@ -8,6 +8,8 @@ Getting Started
 
 To begin developing a new Tethys app, you should start with a Tethys scaffold. This will include all the initial files you'll need to get an app up and running.
 
+To learn more about scaffolding Tethys apps, see: [Tethys App Project](https://docs.tethysplatform.org/en/stable/tutorials/get_started/new_app_project.html)
+
 Start by activating your virtual environment, and execute the following commands to create a new directory to put your Tethys app inside:
 
 ```bash
@@ -154,6 +156,8 @@ Soon we'll be adding calculations that your app will run. For those calculations
 
 You'll now add two custom settings to your app. This will be saved for all users. You'll be able to set these values in the UI inside your Tethys Portal.
 
+To learn more about Custom Settings, see: [Custom Settings](https://docs.tethysplatform.org/en/stable/tethys_sdk/app_settings.html#custom-settings)
+
 To add these settings add the following code to your `app.py` file:
 
 ```python {1,6-22}
@@ -202,6 +206,8 @@ We'll go over how to utilize these values later on in the tutorial.
 ## Customize Your Home Page
 
 Now, let's try changing the contents of your home page by editing the contents of `templates/home.html`.
+
+To learn more about Tethys templating, see: [Templating](https://docs.tethysplatform.org/en/stable/tethys_sdk/templating.html)
 
 For this tutorial, you'll be building a simple app that performs calculations relating to earthquake data. 
 
@@ -262,8 +268,14 @@ Now, let's look at putting some gizmos into the Calculations Page
 
 Gizmos are building blocks that can be used to create beautiful interactive controls for web apps. Using the Template Gizmos API, developers can add date-pickers, plots, and maps to their app pages with minimal coding.
 
+To learn more about Tethys Gizmos, see: [Gizmos](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos.html)
+
 ### Define Gizmos in Controller
-We begin by adding these gizmos to our controller:
+We begin by adding these gizmos to our controller. The `TextInput` gizmo creates a text input form field and the `Button` gizmo creates a styled button.
+
+To learn more about the TextInput Gizmo, see: [TextInput](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos/text_input.html)
+
+To learn more about the Button Gizmo, see: [Button](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos/button.html)
 
 ```python
 from tethys_sdk.gizmos import Button, TextInput
@@ -316,6 +328,8 @@ We are currently using the default version of what is called a base template. Th
 ![Base Template Explained](/img/getting-started/base-template-explained.png)
 
 We can change that template, however. For our calculation page, we're going to use a base template that provides two columns with no navigation bar on the side.
+
+To learn more about Tethys base templates, see: [Base Templates](https://docs.tethysplatform.org/en/stable/tethys_sdk/templating.html#base-templates)
 
 Change the top line of your `calculations.html` file to this: 
 
@@ -465,6 +479,8 @@ Now go ahead and refresh the page, and test the calculations again. You should s
 
 Now that the calculations are working, let's display them in a nicer-looking way. For that, we'll use the BarPlot gizmo. 
 
+To learn more about the BarPlot Gizmo, see: [BarPlot](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos/bar_plot.html)
+
 Begin by once again defining the gizmo in your controller:
 
 ```python {1,9-24,26}
@@ -517,6 +533,8 @@ Go ahead and refresh your page, and run your calculations one more time. This ti
 ## Add a MapView Gizmo
 
 Now, let's replace that bar plot with an interactive map. We're going to change a few elements of your application now as well. Begin by removing the second set of inputs and renaming your gizmos and variables to reflect that. Go ahead and remove the calculations being performed and the bar plot gizmo here as well:
+
+To learn more about the MapView Gizmo, see: [MapView](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos/map_view.html)
 
 ``` python {1,6-8,10-16,18-20,22,29-30}
 from tethys_sdk.gizmos import MapView
@@ -577,7 +595,9 @@ Now open your app and refresh the page in your browser and you'll see the follow
 ## Add an ArcGis Layer to the MapView
 Now the map is up and running, let's add a layer to it to display locations of fault lines and tectonic plate boundaries:
 
-Begin by building a MapView Layer by adding the following code to `controllers.py`:
+Begin by building a MapView Layer by adding the following code to `controllers.py`. The `MVLayer` object is used to define layers that can be added to a MapView.
+
+To learn more about MVLayer, see: [MVLayer](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos/map_view.html#mvlayer)
 
 ```python {1,8-15,17}
 from tethys_sdk.gizmos import MVLayer
@@ -604,7 +624,9 @@ Open the app and refresh the page to see the tectonic plate boundaries displayed
 
 Now that you've got that MapView gizmo in your calculations page, you're ready to use it to provide spatial input to your app. 
 
-In order to do so, we'll begin by adding drawing options that configure how drawing on this map will work. Begin by adding the following code to your `controllers.py` file:
+In order to do so, we'll begin by adding drawing options that configure how drawing on this map will work. Begin by adding the following code to your `controllers.py` file. The `MVDraw` object is used to configure drawing tools for the MapView.
+
+To learn more about MVDraw, see: [MVDraw](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos/map_view.html#mvdraw)
 
 ```python {1,7-14,21}
 from tethys_sdk.gizmos import MVDraw
@@ -993,6 +1015,10 @@ Now each time you press "calculate", the results will be saved to your `measurem
 ## Add a MapLayout Page
 The last step now will be to add your MapLayout page and add a layer with your saved measurements data.
 
+The `MapLayout` is a pre-built Tethys layout that provides a full-page map view with built-in features like layer groups, legends, and properties popups.
+
+To learn more about Map Layout, see: [Map Layout](https://docs.tethysplatform.org/en/stable/tethys_sdk/layouts/map_layout.html)
+
 Begin by adding the following code to your `controllers.py` file:
 
 ```python
@@ -1212,4 +1238,18 @@ That's it! You've built a complete Tethys app. You've learned how to do the foll
 - Perform calculations
 - Visualize the results with both interactive maps and plots. 
 
-For more information and tutorials like this one on how to build Tethys web applications, checkout the [Tethys Platform documentation](https://docs.tethysplatform.org/)
+## Solution
+
+The completed solution for this workshop is available on GitHub: [tethysapp-earthquake_calculator](https://github.com/tethysplatform/tethysapp-earthquake_calculator)
+
+## Next Steps
+
+Now that you've completed this tutorial, here are some recommended resources to continue your Tethys Platform journey:
+
+- **[Key Concepts Tutorials](https://docs.tethysplatform.org/en/stable/tutorials/key_concepts.html)** – Learn beginner, intermediate, and advanced concepts for building Tethys apps.
+- **[Map Layout Tutorial](https://docs.tethysplatform.org/en/stable/tutorials/map_layout.html)** – Dive deeper into the MapLayout and its full set of features.
+- **[Gizmos Reference](https://docs.tethysplatform.org/en/stable/tethys_sdk/gizmos.html)** – Explore all available Tethys gizmos (inputs, plots, maps, etc.).
+- **[Templating Reference](https://docs.tethysplatform.org/en/stable/tethys_sdk/templating.html)** – Learn more about the Tethys templating system and available base templates.
+- **[App Settings](https://docs.tethysplatform.org/en/stable/tethys_sdk/app_settings.html)** – Learn about all the types of app settings available in Tethys.
+- **[Tethys Paths API](https://docs.tethysplatform.org/en/stable/tethys_sdk/paths.html)** – Manage file storage for your app using workspace and media directories.
+- **[Tethys Platform Documentation](https://docs.tethysplatform.org/)** – The full Tethys Platform documentation with all tutorials, recipes, and SDK references.
