@@ -1,0 +1,131 @@
+{
+  "name": "GEOGLOWS Demo (Part2 - Popup Modal)",
+  "description": "demo",
+  "publicDashboard": false,
+  "userPermission": "admin",
+  "permissions": [
+    {
+      "username": "ckrewson",
+      "permission": "admin"
+    }
+  ],
+  "unrestrictedPlacement": true,
+  "image": "/media/tethysdash/app/970003a3-b4a6-40b9-a2bf-397bb2cc3321.png",
+  "owner": "ckrewson",
+  "notes": "",
+  "tabs": [
+    {
+      "id": 153,
+      "name": "Main",
+      "gridItems": [
+        {
+          "i": "1",
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 44,
+          "source": "Map",
+          "args_string": {
+            "baseMap": "${Base Map}",
+            "layerControl": true,
+            "layers": [
+              {
+                "configuration": {
+                  "type": "ImageLayer",
+                  "props": {
+                    "name": "China Flowlines",
+                    "minZoomQuery": "12",
+                    "source": {
+                      "type": "ESRI Image and Map Service",
+                      "props": {
+                        "url": "https://livefeeds3.arcgis.com/arcgis/rest/services/GEOGLOWS/GlobalWaterModel_Medium/MapServer",
+                        "params": {
+                          "LAYERDEFS": "{\"0\": \"rivercountry = 'China'\"}"
+                        }
+                      }
+                    }
+                  }
+                },
+                "attributeAliases": {
+                  "Flow Forecast (m³/sec)": {
+                    "objectid": "OBJECTID",
+                    "comid": "TDX Hydro Link Number",
+                    "outletcomid": "Terminal TDX Hydro Link Number",
+                    "region": "TDX Hydro Region Number",
+                    "vpu": "TDX Sub Basin Id",
+                    "upstreamarea": "Upstream Drainage Area (m²)",
+                    "geodesiclength": "Geodesic Stream Length (m)",
+                    "streamorder": "Strahler Stream Order",
+                    "rivercountry": "River Country Name",
+                    "outletcountry": "Outlet Country Name",
+                    "timevalue": "Forecast Timestamp",
+                    "meanflow": "Mean Flow (m³/sec)",
+                    "thickness": "Line Class",
+                    "returnperiod": "Return Period",
+                    "shape": "Shape"
+                  }
+                },
+                "omittedPopupAttributes": {
+                  "Flow Forecast (m³/sec)": [
+                    "objectid",
+                    "outletcomid",
+                    "region",
+                    "vpu",
+                    "rivercountry",
+                    "outletcountry",
+                    "thickness",
+                    "shape"
+                  ]
+                },
+                "popupConfig": {
+                  "mode": "modal",
+                  "position": {
+                    "leftPct": 2.25,
+                    "topPct": 45.33333333333333,
+                    "widthPct": 95.75,
+                    "heightPct": 47.55555555555556
+                  },
+                  "titleTemplate": "GeoGLOWS Forecast - ${feature.comid}",
+                  "gridItems": [
+                    {
+                      "args_string": "{\"river_ID\":\"${feature.comid}\"}",
+                      "h": 19,
+                      "i": "1",
+                      "source": "geoglows_forecast_plot",
+                      "metadata_string": "{}",
+                      "w": 100,
+                      "x": 0,
+                      "y": 0,
+                      "id": null,
+                      "uuid": "60d9eb38-16ee-4c8d-9dad-d2aa854170ca"
+                    }
+                  ]
+                }
+              }
+            ],
+            "map_extent": {
+              "extent": "12026549.49,4986613.44,4.17"
+            },
+            "mapDrawing": {}
+          },
+          "metadata_string": {}
+        },
+        {
+          "i": "2",
+          "x": 0,
+          "y": 0,
+          "w": 18,
+          "h": 6,
+          "source": "Variable Input",
+          "args_string": {
+            "variable_name": "Base Map",
+            "show_label": true,
+            "variable_options_source": "Base Map Layers",
+            "initial_value": "https://server.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer"
+          },
+          "metadata_string": {}
+        }
+      ]
+    }
+  ]
+}
