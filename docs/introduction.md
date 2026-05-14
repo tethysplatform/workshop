@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
 title: Introduction
 ---
 
@@ -11,10 +11,10 @@ Welcome! This workshop is a hands-on introduction to building geoscientific web 
 
 | # | Tutorial | What you build | Where it runs |
 |---|---|---|---|
-| 1 | [Getting Started](./workshop/getting-started) | An **Earthquake Calculator** Tethys app with forms, interactive maps, and saved measurement results | Local Tethys server |
-| 2 | [Component Applications](./workshop/component-applications) | A **Well Drawdown Calculator** Component App driven by reactive state, sliders, and live plots | Local Tethys server |
-| 3 | [TethysDash: Creating Dashboards](./workshop/tethysdash-creating-dashboards) | A **GEOGLOWS Demo** dashboard showing global water-model river flowlines for China | Hosted on the TGF Portal — no local install required |
-| 4 | [TethysDash: Creating Custom Plugins](./workshop/tethysdash-creating-custom-plugins) | Extend the GEOGLOWS dashboard with a custom forecast-plot plugin tied to map clicks | Local TethysDash install |
+| 1 | [Getting Started](./getting-started) | An **Earthquake Calculator** Tethys app with forms, interactive maps, and saved measurement results | Local Tethys server |
+| 2 | [Component Applications](./component-applications) | A **Well Drawdown Calculator** Component App driven by reactive state, sliders, and live plots | Local Tethys server |
+| 3 | [TethysDash: Creating Dashboards](./tethysdash-creating-dashboards) | A **GEOGLOWS Demo** dashboard showing global water-model river flowlines for China | Hosted on the TGF Portal — no local install required |
+| 4 | [TethysDash: Creating Custom Plugins](./tethysdash-creating-custom-plugins) | Extend the GEOGLOWS dashboard with a custom forecast-plot plugin tied to map clicks | Local TethysDash install |
 
 The tutorials are designed to be completed in order, but each one is self-contained — feel free to jump to a specific topic if you already know the rest. A reference solution is provided at the end of every tutorial in case you get stuck.
 
@@ -130,7 +130,7 @@ The [Tethys quickstart guide](https://docs.tethysplatform.org/en/latest/) explai
 
 ## Ready to Begin
 
-You are all set! Head over to [**Tutorial 1: Getting Started**](./workshop/getting-started) to scaffold your first Tethys app.
+You are all set! Head over to [**Tutorial 1: Getting Started**](./getting-started) to scaffold your first Tethys app.
 
 :::tip
 Tutorial 3 runs entirely in the browser on the hosted [TGF Portal](https://demo.tethysgeoscience.org/) and does **not** require your local environment. If you only plan to do Tutorial 3, you can skip the setup above — just create a TGF Portal account when you reach that tutorial.

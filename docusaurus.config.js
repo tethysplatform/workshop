@@ -96,8 +96,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Workshop Intro',
-                to: '/docs/intro',
+                label: 'Introduction',
+                to: '/docs/introduction',
               },
               {
                 label: 'Tethys Docs',
