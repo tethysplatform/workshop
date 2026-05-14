@@ -92,7 +92,7 @@ You should now be looking at a fresh dashboard containing one default grid item.
 
 ### Step 5 — Edit attributes and popup
 
-GEOGLOWS column names like `objectid` and `shape` are not user-friendly. Trim the popup so it only shows useful fields by omitting the following from **Attributes/Popup**:
+GEOGLOWS column names like `objectid` and `shape` are not user-friendly. Trim the popup so it only shows useful fields by omitting the following from **Attributes/Table Popup**:
 
 - `objectid`
 - `outletcomid`
