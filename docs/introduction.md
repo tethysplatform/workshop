@@ -13,8 +13,8 @@ Welcome! This workshop is a hands-on introduction to building geoscientific web 
 |---|---|---|---|
 | 1 | [Getting Started](./getting-started) | An **Earthquake Calculator** Tethys app with forms, interactive maps, and saved measurement results | Local Tethys server |
 | 2 | [Component Applications](./component-applications) | A **Well Drawdown Calculator** Component App driven by reactive state, sliders, and live plots | Local Tethys server |
-| 3 | [TethysDash: Creating Dashboards](./tethysdash-creating-dashboards) | A **GEOGLOWS Demo** dashboard showing global water-model river flowlines for China | Hosted on the TGF Portal — no local install required |
-| 4 | [TethysDash: Creating Custom Plugins](./tethysdash-creating-custom-plugins) | Extend the GEOGLOWS dashboard with a custom forecast-plot plugin tied to map clicks | Local TethysDash install |
+| 3 | [TethysDash: Creating Dashboards](./tethysdash/creating-dashboards) | A **GEOGLOWS Demo** dashboard showing global water-model river flowlines for China | Hosted on the TGF Portal — no local install required |
+| 4 | [TethysDash: Creating Custom Plugins](./tethysdash/creating-custom-plugins) | Extend the GEOGLOWS dashboard with a custom forecast-plot plugin tied to map clicks | Local TethysDash install |
 
 The tutorials are designed to be completed in order, but each one is self-contained — feel free to jump to a specific topic if you already know the rest. A reference solution is provided at the end of every tutorial in case you get stuck.
 
