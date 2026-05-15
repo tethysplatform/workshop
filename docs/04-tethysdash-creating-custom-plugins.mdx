@@ -3,7 +3,7 @@ import TabItem from "@theme/TabItem";
 
 # TethysDash: Creating Custom Plugins
 
-This tutorial picks up where [TethysDash: Creating Dashboards](./04-tethysdash-creating-dashboards.md) left off. You will extend the dashboard from Part 1 by connecting the map's `comid` attribute to a new variable input, then adding a GeoGLOWS forecast plot that updates whenever the user clicks a river segment on the map.
+This tutorial picks up where [TethysDash: Creating Dashboards](./03-tethysdash-creating-dashboards.md) left off. You will extend the dashboard from Part 1 by connecting the map's `comid` attribute to a new variable input, then adding a GeoGLOWS forecast plot that updates whenever the user clicks a river segment on the map.
 
 ## Objectives
 
@@ -13,7 +13,7 @@ This tutorial picks up where [TethysDash: Creating Dashboards](./04-tethysdash-c
 
 ## Prerequisites
 
-- Complete [TethysDash: Creating Dashboards](./04-tethysdash-creating-dashboards.md). You should have a dashboard named **GEOGLOWS Demo** that contains a Map of Chinese GEOGLOWS flowlines and a **Base Map** variable input.
+- Complete [TethysDash: Creating Dashboards](./03-tethysdash-creating-dashboards.md). You should have a dashboard named **GEOGLOWS Demo** that contains a Map of Chinese GEOGLOWS flowlines and a **Base Map** variable input.
 - A local installation of TethysDash, see [Installation and Setup — TethysDash](https://tethysdash.readthedocs.io/en/latest/installation.html#quick-installation).
 - The [tethysdash_examples](https://github.com/FIRO-Tethys/tethysdash_examples) plugin package must be installed as a TethysDash dependency. It provides the `GeoGLOWS Forecast Plot` visualization used in this tutorial.
 
@@ -23,14 +23,14 @@ This tutorial picks up where [TethysDash: Creating Dashboards](./04-tethysdash-c
 
 Open your **GEOGLOWS Demo** dashboard and click the **Edit** (pencil) icon in the toolbar to enter edit mode.
 
-![Starting dashboard from Part 1](../images/2.1_dashboard_starting_point.png)
+![Starting dashboard from Part 1](./images/tethysdash-creating-custom-plugins/2.1_dashboard_starting_point.png)
 
 ### Step 2 — Edit the map layer
 
 1. Find the map grid item, click its three-dot menu, and click **Edit**.
 2. In the map editor's **Layers** list, click the **China Flowlines** layer to open the layer editor.
 
-![Opening the China Flowlines layer editor](../images/2.2_edit_layer.png)
+![Opening the China Flowlines layer editor](./images/tethysdash-creating-custom-plugins/2.2_edit_layer.png)
 
 ### Step 3 — Connect `comid` to a `river_id` variable input
 
@@ -39,7 +39,7 @@ Open your **GEOGLOWS Demo** dashboard and click the **Edit** (pencil) icon in th
 3. Set its **Alias** to "River ID".
 4. Set its **Variable Input Name** to `river_id`.
 
-![Setting the river_id variable input on the comid attribute](../images/2.3_update_attribute_variable.png)
+![Setting the river_id variable input on the comid attribute](./images/tethysdash-creating-custom-plugins/2.3_update_attribute_variable.png)
 
 > Setting a variable input name on an attribute means: whenever a user clicks a feature on the map, that feature's value for this attribute is written to the named variable input. Any visualization that references `${river_id}` will then re-fetch with the new value. This is used in the **Grid Item** path below. In the **Popup Modal** path the popup instead uses `${feature.comid}` directly, so the variable input binding is optional — but setting it costs nothing and keeps both paths open.
 >
@@ -141,13 +141,13 @@ Click the **+ (Add Dashboard Item)** icon in the toolbar. A new empty grid item 
 
 1. Find the new grid item, click its three-dot menu, and click **Edit**.
 
-![Editing the new grid item](../images/2.6_edit_new_grid_item.png)
+![Editing the new grid item](./images/tethysdash-creating-custom-plugins/2.6_edit_new_grid_item.png)
 
 2. Set the **Visualization Type** to `GeoGLOWS Forecast Plot` (under the **Tutorials** group).
 3. Set the plot's properties:
    - **River ID:** `${river_id}`
 
-![Configuring the GeoGLOWS Forecast Plot](../images/2.6_plot_setup.png)
+![Configuring the GeoGLOWS Forecast Plot](./images/tethysdash-creating-custom-plugins/2.6_plot_setup.png)
 
 The `${river_id}` template tells the plot to read from the variable input you connected to the map. When the user clicks a river segment, the plot re-fetches the forecast for that segment's `comid`.
 
@@ -159,7 +159,7 @@ Until the user clicks a river, `river_id` has no value. Configure a friendly pla
 2. Under **On Any Empty Variable**, enter: `Click on a river to see the GeoGLOWS forecast`
 3. Set the **Background Color** to `#dbdbdb` (light grey).
 
-![Configuring the plot's placeholder and background](../images/2.7_plot_settings.png)
+![Configuring the plot's placeholder and background](./images/tethysdash-creating-custom-plugins/2.7_plot_settings.png)
 
 > See [Dashboard Visualizations](https://tethysdash.readthedocs.io/en/latest/dashboard_visualizations.html) for every option in the visualization Settings tab.
 
@@ -171,7 +171,7 @@ Click **Save** at the bottom of the visualization editor. The new grid item now 
 
 Drag the bottom-right corner of the new grid item to resize it. A common layout is to place the plot below the map spanning the full dashboard width so the forecast is easy to read at a glance.
 
-![Plot resized and placed below the map](../images/2.9_plot_resize.png)
+![Plot resized and placed below the map](./images/tethysdash-creating-custom-plugins/2.9_plot_resize.png)
 
 </TabItem>
 <TabItem value="modal" label="Popup Modal">
@@ -194,7 +194,7 @@ The `${feature.comid}` token is replaced at runtime with the `comid` of whicheve
 
 6. Leave the **Default Position** at the default (60 × 60%, centered) or drag the canvas rectangle to reposition and resize the modal.
 
-![Configuring the Custom Popup Modal](../images/2.5B_setup_modal_popup.png)
+![Configuring the Custom Popup Modal](./images/tethysdash-creating-custom-plugins/2.5B_setup_modal_popup.png)
 
 **Step 6 — Add the forecast plot to the popup layout**
 
@@ -211,7 +211,7 @@ Click **Edit popup layout**. A mini-dashboard editor opens — this is the conte
 5. Click **Save** on the visualization editor.
 6. Resize the plot grid item to fill the popup area.
 
-![Popup layout editor with the GeoGLOWS Forecast Plot configured](../images/2.6B_setup_popup_layout.png)
+![Popup layout editor with the GeoGLOWS Forecast Plot configured](./images/tethysdash-creating-custom-plugins/2.6B_setup_popup_layout.png)
 
 7. Click **Save** to close the popup layout editor.
 
@@ -236,14 +236,14 @@ Exit edit mode and zoom in on the map past zoom 12 until the flowlines render.
 
 Click any river segment in China — the GeoGLOWS Forecast Plot grid item should immediately re-render with the forecast for that `comid`. Click a different segment and the plot updates again.
 
-![Final dashboard with the forecast plot responding to a river click](../images/2.10_try_it_out.png)
+![Final dashboard with the forecast plot responding to a river click](./images/tethysdash-creating-custom-plugins/2.10_try_it_out.png)
 
 </TabItem>
 <TabItem value="modal" label="Popup Modal">
 
 Click any river segment in China — a floating popup modal should appear over the map showing the GeoGLOWS forecast for that segment's `comid`, with the title `GeoGLOWS Forecast — <comid>`. Close the modal with the **×** button and click a different segment to confirm the title and chart update.
 
-![Popup modal showing the GeoGLOWS forecast after clicking a river](../images/2.10B_try_it_out.png)
+![Popup modal showing the GeoGLOWS forecast after clicking a river](./images/tethysdash-creating-custom-plugins/2.10B_try_it_out.png)
 
 </TabItem>
 </Tabs>

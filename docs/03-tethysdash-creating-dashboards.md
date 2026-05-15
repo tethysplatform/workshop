@@ -27,18 +27,18 @@ This tutorial walks through building a TethysDash dashboard that displays the GE
 
 1. From the TethysDash landing page, click **+ Create a New Dashboard**.
 
-![TethysDash landing page](../images/1.1_landing_page.png)
+![TethysDash landing page](./images/tethysdash-creating-dashboards/1.1_landing_page.png)
 
 2. Enter the following:
    - **Name:** `GEOGLOWS Demo`
    - **Description:** `demo`
 3. Click **Create**.
 
-![Creating a new dashboard](../images/1.1_creating_dashboard.png)
+![Creating a new dashboard](./images/tethysdash-creating-dashboards/1.1_creating_dashboard.png)
 
 4. Double-click the new `GEOGLOWS Demo` dashboard card to open it.
 
-![New dashboard card on the landing page](../images/1.1_dashboard_in_landing_page.png)
+![New dashboard card on the landing page](./images/tethysdash-creating-dashboards/1.1_dashboard_in_landing_page.png)
 
 You should now be looking at a fresh dashboard containing one default grid item. If the **TethysDash Dashboards** modal appears, dismiss it by checking the "Don't show on startup" option and then pressing the "X" button. You may reopen the modal in the future by pressing the _i_ button in the app header.
 
@@ -46,20 +46,20 @@ You should now be looking at a fresh dashboard containing one default grid item.
 
 1. Toggle the dashboard into edit mode by clicking the **pencil / Edit** icon in the toolbar.
 
-![Edit icon in the dashboard toolbar](../images/1.2_edit_icon.png)
+![Edit icon in the dashboard toolbar](./images/tethysdash-creating-dashboards/1.2_edit_icon.png)
 
 2. Find the default grid item and click its three-dot menu.
 3. Click **Edit**.
 
-![Editing the default grid item](../images/1.2_edit_grid_item.png)
+![Editing the default grid item](./images/tethysdash-creating-dashboards/1.2_edit_grid_item.png)
 
 4. In the **Visualization Type** dropdown, type `Map` and select the Map option under the **Default** section.
 
-![Choosing the Map visualization](../images/1.2_choose_map.png)
+![Choosing the Map visualization](./images/tethysdash-creating-dashboards/1.2_choose_map.png)
 
 5. Select a Base Map for the map (for example, `World Topo Map`).
 
-![Map with a base map selected](../images/1.2_map_with_basemap.png)
+![Map with a base map selected](./images/tethysdash-creating-dashboards/1.2_map_with_basemap.png)
 
 > See [Creating a Map](https://tethysdash.readthedocs.io/en/latest/maps/create_map.html) for the full Map editor reference.
 
@@ -70,7 +70,7 @@ You should now be looking at a fresh dashboard containing one default grid item.
    - **Name:** `China Flowlines`
    - **Min Zoom Query:** `12`
 
-![Adding the China Flowlines layer](../images/1.3_add_layer.png)
+![Adding the China Flowlines layer](./images/tethysdash-creating-dashboards/1.3_add_layer.png)
 
 > **Why `Min Zoom Query`?** The GEOGLOWS service has hundreds of thousands of features. Setting a min zoom of `12` means popup queries (which fetch attributes for clicked features) only fire once the user has zoomed in far enough that the request is small and fast.
 >
@@ -84,7 +84,7 @@ You should now be looking at a fresh dashboard containing one default grid item.
    - **URL:** `https://livefeeds3.arcgis.com/arcgis/rest/services/GEOGLOWS/GlobalWaterModel_Medium/MapServer`
    - **params - LAYERDEFS:** `{"0": "rivercountry = 'China'"}`
 
-![Configuring the layer source](../images/1.4_layer_source.png)
+![Configuring the layer source](./images/tethysdash-creating-dashboards/1.4_layer_source.png)
 
 > **Why `params - LAYERDEFS`?** The GEOGLOWS service covers the entire globe. Setting a layer definition query filters the service to only return river segments in China, which is much more performant and relevant for this dashboard. The value must be valid JSON with double quotes, and the layer index (`0`) is required to target the correct sublayer.
 >
@@ -103,7 +103,7 @@ GEOGLOWS column names like `objectid` and `shape` are not user-friendly. Trim th
 - `thickness`
 - `shape`
 
-![Configuring attribute aliases and popup fields](../images/1.5_layer_attributes.png)
+![Configuring attribute aliases and popup fields](./images/tethysdash-creating-dashboards/1.5_layer_attributes.png)
 
 > See [Attributes and Popups](https://tethysdash.readthedocs.io/en/latest/maps/attributes_and_popups_tab.html) for the full set of aliasing, omission, and click-binding options.
 
@@ -111,27 +111,27 @@ GEOGLOWS column names like `objectid` and `shape` are not user-friendly. Trim th
 
 Click **Create** at the bottom of the layer editor. The layer collapses back into the map's layer list and shows as `China Flowlines`.
 
-![Flowlines layer rendered on the map](../images/1.6_layer_on_map.png)
+![Flowlines layer rendered on the map](./images/tethysdash-creating-dashboards/1.6_layer_on_map.png)
 
 ### Step 7 — Edit the Map Extent
 
 1. Expand the map editor's **Map Extent** section.
 2. Select **Use the Previewed Map Extent** option.
 
-![Updated map extent zoomed to China](../images/1.7_updated_map_extent.png)
+![Updated map extent zoomed to China](./images/tethysdash-creating-dashboards/1.7_updated_map_extent.png)
 
 ### Step 8 — Save the map
 
 1. Click **Save** at the bottom of the map's grid item editor. The grid item now renders the GEOGLOWS service.
 2. Click and drag the map grid item's bottom-right corner to resize it to cover the entire dashboard.
 
-![Map grid item resized to fill the dashboard](../images/1.8_map_on_dashboard.png)
+![Map grid item resized to fill the dashboard](./images/tethysdash-creating-dashboards/1.8_map_on_dashboard.png)
 
 ### Step 9 — Save the dashboard
 
 Click the **Save** (disk) icon in the dashboard toolbar to persist everything you have done so far.
 
-![Saving the dashboard](../images/1.9_save_dashboard.png)
+![Saving the dashboard](./images/tethysdash-creating-dashboards/1.9_save_dashboard.png)
 
 Explore the map preview and test that the popups work. Don't worry about the base map yet — you will make that dynamic in the next steps.
 
@@ -139,14 +139,14 @@ Explore the map preview and test that the popups work. Don't worry about the bas
 
 1. Click the dashboard **Settings** (gear) icon in the toolbar.
 
-![Opening the dashboard settings pane](../images/1.10_dashboard_settings_icon.png)
+![Opening the dashboard settings pane](./images/tethysdash-creating-dashboards/1.10_dashboard_settings_icon.png)
 
 2. Scroll to the **Unrestricted Grid Item Placement** section.
 3. Select the checkbox for **On**.
 4. Click the **Save** (disk) icon at the bottom of the settings pane.
 5. Close the settings pane.
 
-![Enabling unrestricted grid item placement](../images/1.10_save_unrestricted_grid_item_placement.png)
+![Enabling unrestricted grid item placement](./images/tethysdash-creating-dashboards/1.10_save_unrestricted_grid_item_placement.png)
 
 > See [Dashboard Settings](https://tethysdash.readthedocs.io/en/latest/dashboard_settings.html) for every option in the gear pane.
 
@@ -158,12 +158,12 @@ Click the **Edit** (pencil) icon to re-enter edit mode. You will now add a Varia
 
 1. Click **+ (Add Dashboard Item)** in the toolbar.
 
-![Adding a new dashboard item](../images/1.12_add_dashboard_item.png)
+![Adding a new dashboard item](./images/tethysdash-creating-dashboards/1.12_add_dashboard_item.png)
 
 2. Find the new grid item and click its three-dot menu.
 3. Click **Edit**.
 
-![Editing the new grid item](../images/1.12_edit_new_item.png)
+![Editing the new grid item](./images/tethysdash-creating-dashboards/1.12_edit_new_item.png)
 
 4. Set the **Visualization Type** to **Variable Input** under the Default section.
 5. Set the variable input's properties as follows:
@@ -171,7 +171,7 @@ Click the **Edit** (pencil) icon to re-enter edit mode. You will now add a Varia
    - **Show Label:** `True`
    - **Variable Options Source:** `Base Map Layers`
 
-![Configuring the Base Map variable input](../images/1.12_variable_input_setup.png)
+![Configuring the Base Map variable input](./images/tethysdash-creating-dashboards/1.12_variable_input_setup.png)
 
 > `Base Map Layers` is a built-in options source that exposes TethysDash's curated list of base map URLs. Using it here means the dropdown is automatically populated with valid base map services.
 >
@@ -181,14 +181,14 @@ Click the **Edit** (pencil) icon to re-enter edit mode. You will now add a Varia
 7. Click **Save** at the bottom of the variable input editor.
 8. Resize and reposition the variable input as you like (e.g., top-left corner as a floating item).
 
-![Variable input resized and placed on the dashboard](../images/1.12_variable_input_resized.png)
+![Variable input resized and placed on the dashboard](./images/tethysdash-creating-dashboards/1.12_variable_input_resized.png)
 
 ### Step 13 — Edit the map
 
 1. Find the map grid item and click its three-dot menu.
 2. Click **Edit**.
 
-![Editing the map grid item again](../images/1.13_edit_map.png)
+![Editing the map grid item again](./images/tethysdash-creating-dashboards/1.13_edit_map.png)
 
 ### Step 14 — Change the base map to reference the variable input
 
@@ -198,7 +198,7 @@ In the map's **Base Map** field, replace whatever value is there with the templa
 ${Base Map}
 ```
 
-![Binding the map's Base Map to the variable input](../images/1.14_connect_variable_input.png)
+![Binding the map's Base Map to the variable input](./images/tethysdash-creating-dashboards/1.14_connect_variable_input.png)
 
 The `${...}` syntax tells TethysDash to substitute in the current value of the variable input named `Base Map` whenever the map renders. Whenever the user picks a different option from the dropdown, the map re-renders with the new base map URL.
 
@@ -219,7 +219,7 @@ Click the dashboard **Save** (disk) icon in the toolbar once more to persist the
 - The map service being used is very finnicky when clicking to get popups. You will need to zoom in very close to get popups to work. This is a quirk of the service and not TethysDash, but it is worth being aware of as you test the dashboard.
 - Refresh the page. The dashboard should reopen at the China extent you saved, with the topo base map selected by default.
 
-![Final dashboard with the base map switched and a popup open](../images/1.17_explore.png)
+![Final dashboard with the base map switched and a popup open](./images/tethysdash-creating-dashboards/1.17_explore.png)
 
 ## Troubleshooting
 
