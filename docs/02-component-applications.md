@@ -18,12 +18,8 @@ In this workshop, you will learn the fundamentals of Tethys Component App develo
 
 ## Prerequisites
 
-- Create a virtual Python environment using conda or pip
-- Activate your virtual environment and install the following packages:
-  - `tethys-platorm`
-  - `numpy`
-  - `scipy`
-  - `reactpy-django`
+- Complete the [Introduction](./introduction) — you should have a `tethys-workshop` directory and a `tethys` virtual environment with Tethys Platform installed.
+- This tutorial additionally needs `numpy`, `scipy`, and `reactpy-django`. You will install these in the next section.
 
 ---
 
@@ -31,9 +27,38 @@ In this workshop, you will learn the fundamentals of Tethys Component App develo
 
 This section shows how to create the workshop app and get the development environment ready.
 
+## Install the additional dependencies
+
+Change into the `tethys-workshop` directory you created in the [Introduction](./introduction) and activate your virtual environment:
+
+**Linux / macOS:**
+
+```bash
+cd tethys-workshop  # if you are not already there
+source ./tethys/bin/activate
+```
+
+**Windows:**
+
+```powershell
+cd tethys-workshop  # if you are not already there
+.\tethys\Scripts\activate
+```
+
+Your prompt should now start with `(tethys)`. Install the additional Python packages this tutorial uses:
+
+```bash
+pip install numpy scipy reactpy-django
+```
+
+What each package is for:
+
+- `numpy` and `scipy` — scientific Python packages used by the well drawdown model
+- `reactpy-django` — the React bridge required by Tethys Component Apps
+
 ## Scaffold the app
 
-Activate your virtual Python environment within which you installed your dependencies, and execute the following from within the directory of your choice:
+With the dependencies installed and your virtual environment still active, scaffold the app by running:
 
 ```bash
 tethys scaffold well_drawdown_calculator -t component

@@ -8,15 +8,23 @@ Getting Started
 
 To begin developing a new Tethys app, you should start with a Tethys scaffold. This will include all the initial files you'll need to get an app up and running.
 
-Start by activating your virtual environment, and execute the following commands to create a new directory to put your Tethys app inside:
+Change into the `tethys-workshop` directory you created in the [Introduction](./introduction) and activate your virtual environment:
+
+**Linux / macOS:**
 
 ```bash
-# Create a working directory (if it doesn't exist already)
-mkdir ~/tethysdev
-cd ~/tethysdev
+cd tethys-workshop  # if you are not already there
+source ./tethys/bin/activate
 ```
 
-Next, scaffold the app by running:
+**Windows:**
+
+```powershell
+cd tethys-workshop  # if you are not already there
+.\tethys\Scripts\activate
+```
+
+Your prompt should now start with `(tethys)`. Scaffold the app by running:
 
 ```bash
 tethys scaffold earthquake_calculator
@@ -24,7 +32,7 @@ tethys scaffold earthquake_calculator
 
 You will be prompted to enter metadata about the app such as, proper name, version, author, and description. All of these metadata are optional and can be changed later in the generated app.py file (as you'll note later on). You can accept the default values by pressing enter, repeatedly.
 
-In a file browser change into your Home directory and open the tethysdev directory. If the scaffolding worked, you should see a directory called tethysapp-earthquake_calculator. All of the source code for your app is located in this directory.
+In a file browser, open your `tethys-workshop` directory. If the scaffolding worked, you should see a directory called `tethysapp-earthquake_calculator` alongside your `tethys/` virtual environment folder. All of the source code for your app is located in this new directory.
 
 ```text title="Scaffolded App Directory"
 tethysapp-earthquake_calculator/
@@ -68,7 +76,7 @@ To learn more about scaffolding Tethys apps, see [Tethys App Project](https://do
 To test your newly scaffolded app, install it by running the following commands:
 
 ```bash
-cd ~/tethysdev/tethysapp-earthquake_calculator
+cd tethysapp-earthquake_calculator
 tethys install -d
 ```
 
