@@ -17,6 +17,51 @@ This tutorial picks up where [TethysDash: Creating Dashboards](./03-tethysdash-c
 - A local installation of TethysDash, see [Installation and Setup — TethysDash](https://tethysdash.readthedocs.io/en/latest/installation.html#quick-installation).
 - The [tethysdash_examples](https://github.com/FIRO-Tethys/tethysdash_examples) plugin package must be installed as a TethysDash dependency. It provides the `GeoGLOWS Forecast Plot` visualization used in this tutorial.
 
+## Install the prerequisites
+
+Change into the `tethys-workshop` directory you created in the [Introduction](./introduction) and activate your virtual environment:
+
+**Linux / macOS:**
+
+```bash
+cd tethys-workshop  # if you are not already there
+source ./tethys/bin/activate
+```
+
+**Windows:**
+
+```powershell
+cd tethys-workshop  # if you are not already there
+.\tethys\Scripts\activate
+```
+
+Your prompt should now start with `(tethys)`. Install TethysDash from PyPI and run the one-time setup command:
+
+```bash
+pip install tethysdash
+tethysdash setup
+```
+
+Then clone the [tethysdash_examples](https://github.com/FIRO-Tethys/tethysdash_examples) repository and install it in development mode so the **GeoGLOWS Forecast Plot** visualization is available in your local TethysDash:
+
+```bash
+git clone https://github.com/FIRO-Tethys/tethysdash_examples.git
+cd tethysdash_examples
+pip install -e .
+cd ..
+```
+
+Finally, start the local TethysDash development server:
+
+```bash
+tethysdash start
+```
+
+A browser tab should open automatically. If it does not, you can access TethysDash at [http://127.0.0.1:8000/apps/tethysdash/](http://127.0.0.1:8000/apps/tethysdash/). Log in with the default credentials:
+
+- **Username:** `admin`
+- **Password:** `pass`
+
 ## Steps
 
 ### Step 1 — Edit the dashboard

@@ -26,6 +26,7 @@ Before starting the workshop you should have:
 - A **terminal** you are comfortable using (`bash`, `zsh`, PowerShell, etc.).
 - A modern **web browser** (Chrome, Firefox, Edge, or Safari).
 - An **internet connection** — several tutorials pull from live data services.
+- **Git** installed — used in Tutorial 4 to clone an example plugin repository. Installation instructions are in the Environment Setup below.
 - A **code editor** of your choice (VS Code, PyCharm, etc.).
 
 You do **not** need prior experience with Tethys Platform, Django, React, or web development. The tutorials introduce everything you need as you go.
@@ -48,7 +49,42 @@ You should see `Python 3.10.x` or higher. If `python` is not recognized, try `py
 On Windows, make sure to check **"Add Python to PATH"** during installation so the `python` command is available in any terminal.
 :::
 
-### Step 2 — Create a workshop directory and virtual environment
+### Step 2 — Install Git
+
+You will use Git in Tutorial 4 to clone an example plugin repository. Skip if you already have Git installed.
+
+**Linux:**
+
+```bash
+# Debian / Ubuntu
+sudo apt-get update && sudo apt-get install git
+
+# Fedora / RHEL
+sudo dnf install git
+```
+
+**macOS:**
+
+```bash
+# Using Homebrew (recommended)
+brew install git
+```
+
+If you do not have Homebrew, the Xcode Command Line Tools also include Git — run `xcode-select --install` and accept the prompt.
+
+**Windows:**
+
+Download and run the installer from [git-scm.com/downloads](https://git-scm.com/downloads). The defaults work for this workshop.
+
+Verify the installation:
+
+```bash
+git --version
+```
+
+You should see output like `git version 2.x.x`.
+
+### Step 3 — Create a workshop directory and virtual environment
 
 Create a directory to hold your workshop work, change into it, and create a virtual environment named `tethys` inside:
 
@@ -70,7 +106,7 @@ python -m venv .\tethys
 
 This creates an isolated Python environment in a new `tethys/` folder inside `tethys-workshop/`. None of the packages you install here will affect your system Python.
 
-### Step 3 — Activate the virtual environment
+### Step 4 — Activate the virtual environment
 
 The activation command depends on your operating system:
 
@@ -94,7 +130,7 @@ To leave the environment at any time, run `deactivate`.
 If PowerShell blocks the activation script with an execution-policy error, run `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned` once and try again.
 :::
 
-### Step 4 — Install Tethys Platform
+### Step 5 — Install Tethys Platform
 
 With the environment active, upgrade `pip` and install Tethys Platform:
 
@@ -109,7 +145,7 @@ Each tutorial will tell you which additional packages it needs and walk you thro
 The full [Tethys Platform installation docs](https://docs.tethysplatform.org/en/latest/installation.html) cover advanced setups (conda, Docker, PostgreSQL, production deployments) if you need them. The `pip` install above is sufficient for this workshop.
 :::
 
-### Step 5 — Run `tethys quickstart`
+### Step 6 — Run `tethys quickstart`
 
 Tethys ships with a single command that configures the local database, starts the development server, and opens the Tethys Portal in your browser:
 
