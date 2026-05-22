@@ -61,6 +61,23 @@ const config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        // Redirect stale "/introduction/<slug>" URLs (produced by relative-link
+        // resolution against a trailing-slash introduction URL) back to the
+        // canonical tutorial pages.
+        redirects: [
+          {from: '/introduction/getting-started', to: '/getting-started'},
+          {from: '/introduction/component-applications', to: '/component-applications'},
+          {from: '/introduction/tethysdash/creating-dashboards', to: '/tethysdash/creating-dashboards'},
+          {from: '/introduction/tethysdash/creating-custom-plugins', to: '/tethysdash/creating-custom-plugins'},
+        ],
+      },
+    ],
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -75,6 +92,8 @@ const config = {
           alt: 'Tethys Platform',
           src: 'img/tethys2.svg',
           srcDark: 'img/tethys.svg',
+          href: 'https://www.tethysplatform.org',
+          target: '_self',
         },
         items: [
           {

@@ -43,6 +43,7 @@ This project follows Docusaurus's recommendation to **co-locate tutorial assets 
 - `docs.routeBasePath: '/'` — the docs plugin serves at the site root, so tutorial URLs do **not** include a `/docs/` segment. Deployed URLs are `/<baseUrl>/<tutorial-slug>` (e.g. `/workshop/introduction`, `/workshop/getting-started`). The marketing landing page from `src/pages/index.js` still wins at `/<baseUrl>/`.
 - `blog: false` — there is intentionally no blog plugin.
 - `editUrl` currently points at the upstream Docusaurus template repo. If "Edit this page" links should point to the real workshop repo, update it to `https://github.com/tethysplatform/workshop/tree/main/`.
+- **`@docusaurus/plugin-client-redirects`** is configured to redirect stale `/introduction/<slug>` URLs (which can sporadically appear when relative links on the introduction page resolve against a trailing-slash URL) back to their canonical tutorial paths. When you add a new top-level tutorial, add a matching redirect entry there too.
 
 `src/pages/index.js` is a tiny redirect-only page: visiting the site root (`/workshop/`) sends users to `/workshop/introduction` via `<Redirect>`. There is no marketing landing page. If you want to restore one, replace the redirect with the usual hero/feature layout.
 
