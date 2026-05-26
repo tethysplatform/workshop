@@ -6,6 +6,10 @@ sidebar_label: Creating Dashboards
 
 This tutorial walks through building a TethysDash dashboard that displays the GEOGLOWS Global Water Model river flowlines for China, with a user-selectable base map.
 
+## Reference Material
+
+Download the slide deck from the TethysDash introduction session: [TethysDash Introduction Presentation (PDF)](./TethysDash_Introduction.pdf).
+
 ## Objectives
 
 - Create a new TethysDash dashboard

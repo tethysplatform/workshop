@@ -4,6 +4,10 @@ title: Getting Started
 Getting Started
 ===============
 
+## Reference Material
+
+Download the slide deck from the workshop introduction session: [Tethys Platform Introduction Presentation (PDF)](./Tethys_Platform_Introduction.pdf).
+
 ## Scaffold a New App
 
 To begin developing a new Tethys app, you should start with a Tethys scaffold. This will include all the initial files you'll need to get an app up and running.
