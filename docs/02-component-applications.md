@@ -374,7 +374,7 @@ This pattern includes:
 - **Badge**: Shows the current value in real-time (see https://mantine.dev/core/badge/)
 - **Slider**: Interactive control for adjusting the value (see https://mantine.dev/core/slider/)
 
-Note that the `value` property of the `Slider` is set to the ***state variable*** we created for this paramter, `max_distance`, and that the setter for this variable is passed to the `onChangeEnd` to ensure that `max_distance` (and) stays in-sync with the value that the user chosen with the `Slider`. More on this concept later.
+Note that the `value` property of the `Slider` is set to the ***state variable*** we created for this paramter, `max_distance`, and that the setter for this variable is passed to the `onChangeEnd` to ensure that `max_distance` stays in-sync with the value that the user chosen with the `Slider`. More on this concept later.
 
 Go ahead and add all six parameter controls inside the first `GridCol(span=12)`, like so:
 
