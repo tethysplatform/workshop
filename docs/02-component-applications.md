@@ -79,7 +79,7 @@ tethys start
 
 ## Open the app
 
-Open your browser and navitate to:
+Open your browser and navigate to:
 
 ```
 http://localhost:8000/apps/well-drawdown-calculator
@@ -160,7 +160,7 @@ Now that you understand a bit more about the [Tethys Component App Library](http
 
 Now we are ready to get to the main focus of our application - that which makes it unique: the well drawdown function.
 
-## Core model/algortihm function
+## Core model/algorithm function
 
 Since the purpose of our application is to provide an interactive well drawdown calculator, the core backend processing logic of our app will be the execution of our well drawdown calculation function. 
 
@@ -208,7 +208,7 @@ Next, we will design and implement the components that will be displayed in our 
 
 Since we know that we want users to be able to provide and adjust the values to the five arguments (i.e. variables) of our `calculate_drawdown` function, we need to create special web variables for these in our `home` page function. These special web variables are known as ***state variables***. 
 
-Any components of your web page that must be dynamic based on coniditional events, such as how a user interacts with the page, must have an accompanying ***state variable*** and its corresponding setter or updater function. The creation and management of these ***state variables*** are faciliated via the `lib.hooks.use_state` function. Note that the `hooks` namespace submodule provides this function. 
+Any components of your web page that must be dynamic based on conditional events, such as how a user interacts with the page, must have an accompanying ***state variable*** and its corresponding setter or updater function. The creation and management of these ***state variables*** are facilitated via the `lib.hooks.use_state` function. Note that the `hooks` namespace submodule provides this function. 
 
 The `lib.hooks.use_state` function:
 - Takes a single argument that represents the **initial, default value** the variable should hold. This is what should be shown when your application page first loads.
@@ -233,7 +233,7 @@ def home(lib):
 Note the following:
 - We used shortened variable names where it made sense (e.g. `q` rather than `pumping_rate`) to facilitate less keystrokes. 
 - With foresight, we decided to have the user only provide the "exponent" of `storativity`, since acceptable values are between 10^-5 and 10^-3.
-- We also are only going to allow the user to pass in a single, max distance rather than an array of distances, since the array can easily be derived with the `np.linespace` function, as you'll see next.
+- We also are only going to allow the user to pass in a single, max distance rather than an array of distances, since the array can easily be derived with the `np.linspace` function, as you'll see next.
 - With foresight, we added a samples variable that we will also let the user adjust to change the resolution of the graphs
 
 ### Add transitionary calculations
@@ -374,7 +374,7 @@ This pattern includes:
 - **Badge**: Shows the current value in real-time (see https://mantine.dev/core/badge/)
 - **Slider**: Interactive control for adjusting the value (see https://mantine.dev/core/slider/)
 
-Note that the `value` property of the `Slider` is set to the ***state variable*** we created for this paramter, `max_distance`, and that the setter for this variable is passed to the `onChangeEnd` to ensure that `max_distance` stays in-sync with the value that the user chosen with the `Slider`. More on this concept later.
+Note that the `value` property of the `Slider` is set to the ***state variable*** we created for this parameter, `max_distance`, and that the setter for this variable is passed to the `onChangeEnd` to ensure that `max_distance` stays in-sync with the value that the user has chosen with the `Slider`. More on this concept later.
 
 Go ahead and add all six parameter controls inside the first `GridCol(span=12)`, like so:
 
@@ -473,7 +473,7 @@ Now we can move on to adding the plots to actually display the chart data we pre
 
 ### Line Plot Component
 
-Recall that we want our first plot to shows drawdown vs. distance along a line from the well using a line chart. For this, we will pivot away from Mantine and use a library more specialized for plotting: Plotly (see https://github.com/plotly/react-plotly.js/). This package is accessed on the `pl` namespace of `lib` and can be added as a nested component to the first `GridCol(span=6)` component like so:
+Recall that we want our first plot to show drawdown vs. distance along a line from the well using a line chart. For this, we will pivot away from Mantine and use a library more specialized for plotting: Plotly (see https://github.com/plotly/react-plotly.js/). This package is accessed on the `pl` namespace of `lib` and can be added as a nested component to the first `GridCol(span=6)` component like so:
 
 ```python
             lib.m.GridCol(span=6)(
