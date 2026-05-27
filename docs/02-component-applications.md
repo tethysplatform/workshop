@@ -351,7 +351,7 @@ The title is extremely simple and can be achieved with Mantine's `Title` compone
 
 ### Input Controls
 
-Now for each each parameter, we'll use the following pattern:
+Now for each parameter, we'll use the following pattern:
 
 ```python
                 lib.m.Group(
